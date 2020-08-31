@@ -1,26 +1,25 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { Layout, Menu } from 'antd';
+import 'antd/dist/antd.css';
+import Plate from './containers/Plate';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const { Header, Content, Footer } = Layout;
 
-export default App;
+const App = () => (
+  <Layout className="layout">
+    <Header style={{ backgroundColor: 'rgb(89, 89, 89)' }}>
+      <div className="logo">
+        <img src="logo.svg" alt="" height="50px" style={{ padding: 5 }} />
+      </div>
+      <Menu theme="light" mode="horizontal"></Menu>
+    </Header>
+    <Content style={{ padding: 15 }}>
+      <div className="site-layout-content">
+        <Plate />
+      </div>
+    </Content>
+    <Footer style={{ textAlign: 'center' }}>Gravity Diagnostics ©2020</Footer>
+  </Layout>
+)
+
+export default App
