@@ -1,8 +1,7 @@
 import React from 'react'
 import { Layout, Menu } from 'antd'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
+import { Switch, Route, Link, useHistory, useLocation } from 'react-router-dom'
 import Home from '../Home'
-import { PlateContextProvider } from '../../contexts/PlateContext'
 import Plate from '../Plate'
 import Rows from '../Rows'
 
@@ -18,34 +17,43 @@ export const AppRouter = () => (
 
 )
 
-export const HUD: React.FC = () => (
-    <PlateContextProvider>
-        <Router>
-            <Layout className="layout" style={{ height: '100%' }}>
-                <Header className='header' style={{ backgroundColor: 'rgb(89, 89, 89)', position: 'fixed', zIndex: 1, width: '100%' }}>
-                    <div className='logo' style={{ float: 'left' }}>
-                        <img src="logo.svg" alt="" style={{ height: 50, padding: 5 }} />
-                    </div>
-                    <div style={{ float: 'left', marginLeft: 30 }}>
-                        <Menu theme="dark" mode="horizontal" style={{ backgroundColor: 'rgb(89, 89, 89)' }} defaultSelectedKeys={['2']}>
-                            <Menu.Item key="1">
-                                <Link to='plate'>Plate</Link>
-                            </Menu.Item>
-                            <Menu.Item key="2">
-                                <Link to='rows'>Rows</Link>
-                            </Menu.Item>
-                        </Menu>
-                    </div>
-                </Header>
+export const HUD: React.FC = () => {
+    const history = useHistory()
 
-                <Content style={{ padding: '0 30px', marginTop: 94 }} className="site-layout">
-                    <div className='site-layout-background'>
-                        <AppRouter />
-                    </div>
-                </Content>
+    return (
+        <Layout className="layout" style={{ height: '100%' }}>
+            <Header className='header' style={{ backgroundColor: 'rgb(89, 89, 89)', position: 'fixed', zIndex: 1, width: '100%' }}>
+                <div className='logo' style={{ float: 'left' }} onClick={() => history.push('/')}>
+                    <img src="logo.svg" alt="" style={{ height: 50, padding: 5 }} />
+                </div>
+                <div style={{ float: 'left', marginLeft: 30 }}>
+                    <Navigation />
+                </div>
+            </Header>
 
-                <Footer style={{ textAlign: 'center' }}>Gravity Diagnostics ©2020</Footer>
-            </Layout>
-        </Router>
-    </PlateContextProvider>
-)
+            <Content style={{ padding: '0 30px', marginTop: 94 }} className="site-layout">
+                <div className='site-layout-background'>
+                    <AppRouter />
+                </div>
+            </Content>
+
+            <Footer style={{ textAlign: 'center' }}>Gravity Diagnostics ©2020</Footer>
+        </Layout>
+    )
+}
+
+const Navigation: React.FC = () => {
+    const location = useLocation()
+    const select = location.pathname.split('/')[1]
+
+    return (
+        <Menu theme="dark" mode="horizontal" style={{ backgroundColor: 'rgb(89, 89, 89)' }} selectedKeys={[select]}>
+            <Menu.Item key="plate">
+                <Link to='plate'>Plate</Link>
+            </Menu.Item>
+            <Menu.Item key="rows">
+                <Link to='rows'>Rows</Link>
+            </Menu.Item>
+        </Menu>
+    )
+}
