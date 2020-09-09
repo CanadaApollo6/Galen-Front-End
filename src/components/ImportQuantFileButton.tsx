@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import { Button, Input, Spin } from 'antd'
-import QuantExportParser from '../services/QuantExportParser';
-import { ImportOutlined } from '@ant-design/icons';
-import CovidDetector from '../services/CovidDetector';
-import { PlateContext } from '../contexts/PlateContext';
-import InvalidDetector from '../services/InvalidDetector';
-import { SampleDetermination, SampleRns } from '../types';
+import QuantExportParser from '../services/QuantExportParser'
+import { ImportOutlined } from '@ant-design/icons'
+import CovidDetector from '../services/CovidDetector'
+import { PlateContext } from '../contexts/PlateContext'
+import InvalidDetector from '../services/InvalidDetector'
+import { SampleDetermination, SampleRns } from '../types'
 
 const ImportQuantFileButton: React.FC = () => {
     const { setDeterminations, setRns, setFile, file, determinations } = useContext(PlateContext)

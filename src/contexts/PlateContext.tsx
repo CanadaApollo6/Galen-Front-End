@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { SampleDetermination, SampleRns } from '../types'
 
 type PlateContextState = {
-    file: File | undefined,
+    file: File | undefined
     setFile: React.Dispatch<File>
-    determinations: SampleDetermination[],
+    determinations: SampleDetermination[]
     setDeterminations: React.Dispatch<SampleDetermination[]>
     rns: SampleRns
     setRns: React.Dispatch<SampleRns>

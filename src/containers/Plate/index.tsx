@@ -1,12 +1,12 @@
 import React, { useContext, useState } from 'react'
 import { Card, Row, Col, PageHeader } from 'antd'
-import { ContextGraphOptions } from '../../components/GraphOptions';
+import { ContextGraphOptions } from '../../components/GraphOptions'
 import ImportQuantFileButton from '../../components/ImportQuantFileButton'
-import { AmpChart } from '../../components/AmpChart';
-import { GraphContextProvider } from '../../contexts/GraphContext';
+import { AmpChart } from '../../components/AmpChart'
+import { GraphContextProvider } from '../../contexts/GraphContext'
 import { PlateContext } from '../../contexts/PlateContext'
-import { SampleDetermination } from '../../types';
-import ExportButton from '../../components/ExportButton';
+import { SampleDetermination } from '../../types'
+import ExportButton from '../../components/ExportButton'
 
 type PlateRowProps = { determination: SampleDetermination | undefined, setDetermination: React.Dispatch<SampleDetermination>, row: string }
 

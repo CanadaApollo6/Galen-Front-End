@@ -25,7 +25,8 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "electron": "electron ."
+    "lint": "eslint \"src/**/*{.tsx, .ts, .jsx, .js}\"",
+    "lint:fix": "eslint \"src/**/*{.tsx, .ts, .jsx, .js}\" --fix"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -47,6 +48,8 @@
     "@types/chart.js": "^2.9.24",
     "@types/react-router-dom": "^5.1.5",
     "electron": "^10.1.0",
-    "electron-packager": "^15.1.0"
+    "electron-packager": "^15.1.0",
+    "eslint": "^7.8.1",
+    "eslint-plugin-typescript": "^0.14.0"
   }
 }

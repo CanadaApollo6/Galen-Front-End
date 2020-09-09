@@ -1,13 +1,13 @@
 import React, { useContext } from 'react'
 import { Card, Row, Col, PageHeader, Divider } from 'antd'
 import ImportQuantFileButton from '../../components/ImportQuantFileButton'
-import { AmpChart } from '../../components/AmpChart';
-import { GraphContextProvider } from '../../contexts/GraphContext';
-import { ContextGraphOptions } from '../../components/GraphOptions';
-import { RowsContext, RowsContextProvider } from './RowsContext';
-import ExportButton from '../../components/ExportButton';
-import RowTable from './RowTable';
-import RowFilter from './RowFilter';
+import { AmpChart } from '../../components/AmpChart'
+import { GraphContextProvider } from '../../contexts/GraphContext'
+import { ContextGraphOptions } from '../../components/GraphOptions'
+import { RowsContext, RowsContextProvider } from './RowsContext'
+import ExportButton from '../../components/ExportButton'
+import RowTable from './RowTable'
+import RowFilter from './RowFilter'
 
 const Graphs = () => {
     const { determinations, selected, row } = useContext(RowsContext)

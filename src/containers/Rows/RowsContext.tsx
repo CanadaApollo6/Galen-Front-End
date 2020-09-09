@@ -3,13 +3,13 @@ import { SampleDetermination } from '../../types'
 import { PlateContext } from '../../contexts/PlateContext'
 
 type RowsContextType = {
-    selected: SampleDetermination | undefined,
-    setSelected: React.Dispatch<SampleDetermination>,
-    row: string | undefined,
-    setRow: React.Dispatch<string>,
-    showEvaluated: '0' | '1',
-    setShowEvaluated: React.Dispatch<'0' | '1'>,
-    determinations: SampleDetermination[],
+    selected: SampleDetermination | undefined
+    setSelected: React.Dispatch<SampleDetermination>
+    row: string | undefined
+    setRow: React.Dispatch<string>
+    showEvaluated: '0' | '1'
+    setShowEvaluated: React.Dispatch<'0' | '1'>
+    determinations: SampleDetermination[]
     rows: string[]
 }
 

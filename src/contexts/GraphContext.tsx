@@ -2,13 +2,13 @@ import React, { useState } from 'react'
 import { RnDeltaType, GraphType } from '../types'
 
 type GraphContextState = {
-    graphType: GraphType,
+    graphType: GraphType
     setGraphType: React.Dispatch<GraphType>
-    target: RnDeltaType | undefined,
+    target: RnDeltaType | undefined
     setTarget: React.Dispatch<RnDeltaType | undefined>
-    scale: number | undefined,
+    scale: number | undefined
     setScale: React.Dispatch<number>
-    scales: number[] | undefined,
+    scales: number[] | undefined
     setScales: React.Dispatch<number[]>
 }
 

@@ -1,10 +1,10 @@
 import React, { useContext } from 'react'
 import { Table, Tooltip } from 'antd'
-import DeterminationSelect from '../../components/Inputs/DeterminationSelect';
+import DeterminationSelect from '../../components/Inputs/DeterminationSelect'
 import { SampleDetermination } from '../../types'
-import { RowsContext } from './RowsContext';
-import EvaluatedButton from '../../components/EvaluatedButton';
-import AmpButtons from '../../components/AmpButtons';
+import { RowsContext } from './RowsContext'
+import EvaluatedButton from '../../components/EvaluatedButton'
+import AmpButtons from '../../components/AmpButtons'
 
 const RowTable = () => {
     const { determinations, selected, setSelected } = useContext(RowsContext)
@@ -41,7 +41,7 @@ const RowTable = () => {
             title: 'Determination',
             dataIndex: 'determination',
             key: 'determination',
-            render: (x: any, determination: SampleDetermination) => <DeterminationSelect sample={determination} />,
+            render: (x: string, determination: SampleDetermination) => <DeterminationSelect sample={determination} />,
             sorter: (a: SampleDetermination, b: SampleDetermination) => a.determination?.localeCompare(b.determination || '') || 0,
             onFilter: (value: string | number | boolean, record: SampleDetermination) => record.determination?.indexOf(value.toString()) === 0 || false,
         },
@@ -49,7 +49,7 @@ const RowTable = () => {
             title: '',
             dataIndex: 'well',
             key: 'well',
-            render: (x: any, determination: SampleDetermination) => <EvaluatedButton determination={determination} />
+            render: (x: string, determination: SampleDetermination) => <EvaluatedButton determination={determination} />
         }
     ]
 

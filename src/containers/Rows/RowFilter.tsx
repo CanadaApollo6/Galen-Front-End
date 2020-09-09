@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Row, Col, Form, Select } from 'antd'
-import { RowsContext } from './RowsContext';
-import PlateProgress from '../../components/PlateProgress';
+import { RowsContext } from './RowsContext'
+import PlateProgress from '../../components/PlateProgress'
 
 const RowFilter = () => {
     const { rows, setRow, showEvaluated, setShowEvaluated } = useContext(RowsContext)

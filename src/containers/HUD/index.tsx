@@ -5,7 +5,7 @@ import Home from '../Home'
 import Plate from '../Plate'
 import Rows from '../Rows'
 
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer } = Layout
 
 export const AppRouter = () => (
 

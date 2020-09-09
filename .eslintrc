@@ -1,0 +1,77 @@
+{
+    "env": {
+        "node": true,
+        "browser": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "jsx": true,
+        "useJSXTextNode": true,
+        "project": "tsconfig.json"
+    },
+    "extends": [
+        "react-app",
+        "eslint:recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/recommended-requiring-type-checking"
+    ],
+    "plugins": [
+        "typescript",
+        "@typescript-eslint"
+    ],
+    "rules": {
+        "quotes": "off",
+        "@typescript-eslint/quotes": [
+            "warn",
+            "single"
+        ],
+        "semi": "off",
+        "@typescript-eslint/semi": [
+            "warn",
+            "never"
+        ],
+        "@typescript-eslint/ban-ts-ignore": "off",
+        "@typescript-eslint/explicit-function-return-type": "off",
+        "@typescript-eslint/member-delimiter-style": [
+            "warn",
+            {
+                "multiline": {
+                    "delimiter": "none",
+                    "requireLast": false
+                },
+                "singleline": {
+                    "delimiter": "comma",
+                    "requireLast": false
+                }
+            }
+        ],
+        "no-label-var": "warn",
+        "prefer-const": "warn",
+        "space-before-function-paren": "warn",
+        "no-mixed-spaces-and-tabs": "warn",
+        "no-tabs": "warn",
+        "object-curly-spacing": [
+            "warn",
+            "always"
+        ],
+        "no-console": "warn",
+        "indent": [
+            "off",
+            2,
+            {
+                "MemberExpression": "off",
+                "ObjectExpression": "off",
+                "CallExpression": {
+                    "arguments": "off"
+                },
+                "SwitchCase": 1
+            }
+        ],
+        "no-case-declarations": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "camelcase": "off",
+        "@typescript-eslint/camelcase": "off"
+    }
+}

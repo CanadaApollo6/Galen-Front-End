@@ -19,8 +19,6 @@ const RowsButton = () => {
 const InitialNav = () => {
     const { file, determinations } = useContext(PlateContext)
 
-    console.log(file, determinations)
-
     if (!file) return null
     if (determinations.length === 0) return <Spin />
 
