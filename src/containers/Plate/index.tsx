@@ -1,92 +1,70 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
+import { Card, Row, Col, PageHeader } from 'antd'
+import { ContextGraphOptions } from '../../components/GraphOptions';
 import ImportQuantFileButton from '../../components/ImportQuantFileButton'
-import { Card, Row, Col, PageHeader, Button, Tabs, Collapse, Form } from 'antd'
-import { PlateContextProvider, PlateContext } from '../../contexts/PlateContext'
-import { ExportOutlined } from '@ant-design/icons';
-import PlateDisplay from '../../components/PlateDisplay'
-import RowsDisplay from '../../components/RowsDisplay'
-import ListDisplay from '../../components/ListDisplay'
-import DeltaRnVsCyclesChart from '../../components/DeltaRnVsCyclesChart'
-import GraphTypeSelect from '../../components/Inputs/GraphTypeSelect'
-import TargetSelect from '../../components/Inputs/TargetSelect'
-import ScaleSelect from '../../components/Inputs/ScaleSelect'
+import { AmpChart } from '../../components/AmpChart';
+import { GraphContextProvider } from '../../contexts/GraphContext';
+import { PlateContext } from '../../contexts/PlateContext'
+import { SampleDetermination } from '../../types';
+import ExportButton from '../../components/ExportButton';
 
-const { TabPane } = Tabs
+type PlateRowProps = { determination: SampleDetermination | undefined, setDetermination: React.Dispatch<SampleDetermination>, row: string }
 
-const SampleContent = () => {
-    const { samples } = useContext(PlateContext)
+const PlateRow: React.FC<PlateRowProps> = ({ row, determination, setDetermination }) => {
+    const { determinations } = useContext(PlateContext)
+    const r = determinations.filter(s => s.well.includes(row))
 
-    if (samples.length === 0) return null
+    const getColor = (d: SampleDetermination): string => {
+        if (d.well === determination?.well) return 'blue'
+        if (d.prediction === 'Detected') return 'red'
+        if (d.prediction === 'Repeat') return 'yellow'
 
-    return (
-        <Card>
-            <Tabs defaultActiveKey="1">
-                <TabPane tab="List" key="1">
-                    <ListDisplay />
-                </TabPane>
-                <TabPane tab="Plate" key="2">
-                    <PlateDisplay />
-                </TabPane>
-                <TabPane tab="Row" key="3">
-                    <RowsDisplay />
-                </TabPane>
-            </Tabs>
-        </Card>
-    )
-}
-
-const ChartContent = () => {
-    const { activeSamples } = useContext(PlateContext)
-
-    if (!activeSamples) return null
+        return ''
+    }
 
     return (
-        <Card>
-            <h2>&Delta; Rn vs Cycles</h2>
-            <DeltaRnVsCyclesChart />
-
-            <Collapse ghost>
-                <Collapse.Panel header='Options' key={1}>
-                    <Form labelCol={{ span: 8 }} wrapperCol={{ span: 16 }}>
-                        <Row gutter={15}>
-                            <Col lg={12}>
-                                <Form.Item label='Graph Type'>
-                                    <GraphTypeSelect />
-                                </Form.Item>
-                            </Col>
-
-                            <Col lg={12}>
-                                <Form.Item label='Scale'>
-                                    <ScaleSelect />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-
-                        <Row gutter={15}>
-                            <Col lg={12}>
-                                <Form.Item label='Target'>
-                                    <TargetSelect />
-                                </Form.Item>
-                            </Col>
-                        </Row>
-                    </Form>
-                </Collapse.Panel>
-            </Collapse>
-        </Card>
-    )
-}
-
-export default () => (
-    <PlateContextProvider>
-        <PageHeader ghost={false} title='Plate' extra={[<Button><ExportOutlined /> Export</Button>, <ImportQuantFileButton />]} />
-
-        <Row style={{ marginTop: 15 }} gutter={15}>
-            <Col span={14}>
-                <SampleContent />
-            </Col>
-            <Col span={10}>
-                <ChartContent />
-            </Col>
+        <Row>
+            {r.map(d =>
+                <Col xs={1} onClick={() => setDetermination(d)}>
+                    <div style={{ border: '1px solid #d9d9d9', textAlign: 'center', background: getColor(d), padding: '5px 0 5px' }}>
+                        {d.well}
+                    </div>
+                </Col>
+            )}
         </Row>
-    </PlateContextProvider>
-)
+    )
+}
+
+type PlateMapProps = { determination: SampleDetermination | undefined, setDetermination: React.Dispatch<SampleDetermination> }
+
+const PlateMap: React.FC<PlateMapProps> = ({ determination, setDetermination }) => {
+    const { determinations } = useContext(PlateContext)
+    const rows = determinations.reduce((acc, val) => acc.add(val.well.replace(/\d+/g, '')), new Set<string>())
+
+    return <>{Array.from(rows).map(r => <PlateRow row={r} determination={determination} setDetermination={setDetermination} />)}</>
+}
+
+export default () => {
+    const [determination, setDetermination] = useState<SampleDetermination>()
+
+    return (
+        <GraphContextProvider>
+            <PageHeader ghost={false} title='Plate' extra={[<ExportButton />, <ImportQuantFileButton />]} />
+
+            <Row style={{ marginTop: 15 }} gutter={15}>
+                <Col span={16}>
+                    <Card>
+                        <PlateMap determination={determination} setDetermination={setDetermination} />
+                    </Card>
+                </Col>
+
+                <Col span={8}>
+                    <Card>
+                        <ContextGraphOptions />
+                        <AmpChart determinations={determination ? [determination] : []} />
+                    </Card>
+                </Col>
+            </Row>
+        </GraphContextProvider>
+    )
+}

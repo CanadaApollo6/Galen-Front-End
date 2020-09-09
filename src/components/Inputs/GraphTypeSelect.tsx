@@ -1,10 +1,17 @@
 import React, { useContext } from 'react'
 import { Select } from 'antd'
-import { PlateContext } from '../../contexts/PlateContext'
+import { GraphType } from '../../types'
+import { GraphContext } from '../../contexts/GraphContext'
 
-const GraphTypeSelect = () => {
-    const { graphType, setGraphType } = useContext(PlateContext)
+export const ContextGraphTypeSelect = () => {
+    const { graphType, setGraphType } = useContext(GraphContext)
 
+    return <GraphTypeSelect graphType={graphType} setGraphType={setGraphType} />
+}
+
+type GraphTypeSelectProps = { graphType: GraphType, setGraphType: (gt: GraphType) => void }
+
+export const GraphTypeSelect: React.FC<GraphTypeSelectProps> = ({ graphType, setGraphType }) => {
     return (
         <Select value={graphType} onChange={v => setGraphType(v)}>
             <Select.Option value='linear'>Linear</Select.Option>
@@ -12,5 +19,3 @@ const GraphTypeSelect = () => {
         </Select>
     )
 }
-
-export default GraphTypeSelect

@@ -15,6 +15,7 @@
     "chart.js": "^2.9.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "typescript": "^3.7.5"
   },
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@types/antd": "^1.0.0",
     "@types/chart.js": "^2.9.24",
+    "@types/react-router-dom": "^5.1.5",
     "electron": "^10.1.0",
     "electron-packager": "^15.1.0"
   }

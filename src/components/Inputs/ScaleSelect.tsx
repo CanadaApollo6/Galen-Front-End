@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
-import { PlateContext } from '../../contexts/PlateContext'
 import { Select } from 'antd'
+import { GraphContext } from '../../contexts/GraphContext'
 
-const ScaleSelect = () => {
-    const { scale, setScale, scales } = useContext(PlateContext)
+export const ContextScaleSelect = () => {
+    const { scale, setScale, scales } = useContext(GraphContext)
 
     return (
         <Select value={scale} onChange={setScale}>
@@ -11,5 +11,3 @@ const ScaleSelect = () => {
         </Select>
     )
 }
-
-export default ScaleSelect
