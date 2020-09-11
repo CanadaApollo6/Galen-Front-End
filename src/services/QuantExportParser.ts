@@ -105,7 +105,7 @@ export default async (file: File): Promise<ExportSample[]> => {
     }
 
     return quant_export.results.filter(q => q.target === 'MS2').map((q): ExportSample => ({
-        id: q.sample_id,
+        sample_id: q.sample_id,
         well: q.well_position,
         rns: samples_rns[q.well]
     }))

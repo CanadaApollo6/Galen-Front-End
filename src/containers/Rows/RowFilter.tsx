@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Row, Col, Form, Select } from 'antd'
+import { Row, Col, Form, Select, Badge } from 'antd'
 import { RowsContext } from './RowsContext'
 import PlateProgress from '../../components/PlateProgress'
 
@@ -12,7 +12,16 @@ const RowFilter = () => {
                 <Col span={8}>
                     <Form.Item label='Row'>
                         <Select onChange={(v) => setRow(v.toString())}>
-                            {rows.map(r => <Select.Option value={r}>{r}</Select.Option>)}
+                            {rows.map(([r, n]) => (
+                                <Select.Option value={r}>
+                                    <div style={{ float: 'left' }}>
+                                        <span>{r}</span>
+                                    </div>
+                                    <div style={{ float: 'right' }}>
+                                        <Badge count={n} />
+                                    </div>
+                                </Select.Option>
+                            ))}
                         </Select>
                     </Form.Item>
                 </Col>

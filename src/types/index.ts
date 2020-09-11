@@ -1,4 +1,4 @@
-export type Determination = 'Detected' | 'Not Detected'| 'Inconclusive' | 'Invalid' | 'Repeat'
+export type Determination = 'Detected' | 'Not Detected' | 'Inconclusive' | 'Invalid' | 'Repeat'
 
 export type RnDeltaType = 'rp_cy5_delta' | 'n_gene_delta' | 's_gene_delta' | 'orf1ab_delta' | 'ms2_delta'
 
@@ -16,14 +16,25 @@ export type SampleDetermination = {
     amplifications: Amplification[]
 }
 
-export type Amplification = 'N Gene' | 'S Gene' | 'ORF1ab'
+export type Amplification = 'N Gene' | 'S Gene' | 'ORF1ab' | 'MS2' | 'RP-Cy5'
 
 export type SampleRns = Record<string, Rns>
 
 export type ExportSample = {
-    id: string,
+    sample_id: string,
     well: string
     rns: Rns
 }
 
 export type GraphType = 'linear' | 'logarithmic'
+
+export type Sample = {
+    sample_id: string,
+    well: string
+    determination: Determination | undefined,
+    prediction: Determination | undefined
+    confidence: number,
+    evaluated: boolean | undefined,
+    amplifications: Amplification[],
+    rns: Rns
+}

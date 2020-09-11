@@ -4,13 +4,13 @@ import { PlateContext } from '../../contexts/PlateContext'
 
 type RowsContextType = {
     selected: SampleDetermination | undefined
-    setSelected: React.Dispatch<SampleDetermination>
+    setSelected: React.Dispatch<SampleDetermination | undefined>
     row: string | undefined
     setRow: React.Dispatch<string>
     showEvaluated: '0' | '1'
     setShowEvaluated: React.Dispatch<'0' | '1'>
     determinations: SampleDetermination[]
-    rows: string[]
+    rows: [string, number][]
 }
 
 export const RowsContext = React.createContext<RowsContextType>({
@@ -30,19 +30,24 @@ export const RowsContextProvider: React.FC = ({ children }) => {
     const [determinations, setDeterminations] = useState<SampleDetermination[]>([])
     const [showEvaluated, setShowEvaluated] = useState<'0' | '1'>('0')
     const { determinations: d } = useContext(PlateContext)
-    const [rows, setRows] = useState<string[]>([])
+    const [rows, setRows] = useState<[string, number][]>([])
 
     useEffect(() => {
         if (!row) return
+
         setDeterminations(d
-            .filter(x => x.well.includes(row))
-            .filter(x => showEvaluated === '0' ? !x.evaluated : true)
-        )
+            .filter(x => x.well.substr(0, 1) === row)
+            .filter(x => showEvaluated === '0' ? !x.evaluated : true))
     }, [d, row, setDeterminations, showEvaluated])
 
     useEffect(() => {
         if (!d) return
-        setRows(Array.from(d.reduce((acc, val) => acc.add(val.well.replace(/\d+/g, '')), new Set<string>())))
+
+        const row_dictionary = d
+            .map(({ well, prediction }): [string, number] => [well.substring(0, 1), prediction === 'Detected' ? 1 : 0])
+            .reduce((acc: Record<string, number>, [row, pos]) => ({ ...acc, [row]: acc[row] ? acc[row] + pos : pos }), {})
+
+        setRows(Object.keys(row_dictionary).map(key => [key, row_dictionary[key]]))
     }, [d, setRows])
 
     return (

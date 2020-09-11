@@ -1,4 +1,4 @@
-import React, { useEffect, useContext, useMemo, useState, RefObject } from 'react'
+import React, { useEffect, useContext, useState, useRef } from 'react'
 import { Chart as Chartjs } from 'chart.js'
 import { PlateContext } from '../contexts/PlateContext'
 import { SampleDetermination, RnDeltaType, SampleRns } from '../types'
@@ -22,19 +22,14 @@ const getDataSets = (rns: SampleRns, wells: string[], target: RnDeltaType | unde
     ).flat()
 }
 
-type SampleChartProps = { scale: number | undefined, target: RnDeltaType | undefined, wells: string[], graphType: 'linear' | 'logarithmic' }
+export type SampleChartProps = { scale: number | undefined, target: RnDeltaType | undefined, wells: string[], graphType: 'linear' | 'logarithmic' }
 
 export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphType, wells }) => {
     const { rns } = useContext(PlateContext)
-    const datasets = useMemo(() => getDataSets(rns, wells, target), [target, wells, rns])
-    const [context, setContext] = useState<RefObject<HTMLCanvasElement>>()
+    const context = useRef<HTMLCanvasElement>(document.createElement('canvas'))
 
     useEffect(() => {
-        setContext(React.createRef<HTMLCanvasElement>())
-    }, [setContext])
-
-    useEffect(() => {
-        if (!context?.current || !context.current) return
+        const datasets = getDataSets(rns, wells, target)
 
         new Chartjs(context.current, {
             type: 'line',
@@ -65,7 +60,7 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
                 }
             }
         })
-    })
+    }, [rns, wells, target, graphType, scale])
 
     return (
         <div style={{ width: '100%' }}>
@@ -74,11 +69,15 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
     )
 }
 
-type AmpChartProps = { determinations: SampleDetermination[] }
+export type AmpChartProps = { determinations: SampleDetermination[] }
 
 export const AmpChart: React.FC<AmpChartProps> = ({ determinations }) => {
-    const wells = useMemo(() => determinations.map(d => d.well), [determinations])
+    const [wells, setWells] = useState<string[]>([])
     const { scale, target, graphType } = useContext(GraphContext)
+
+    useEffect(() => {
+        setWells(determinations.map(d => d.well))
+    }, [determinations, setWells])
 
     return <SampleChart scale={scale} target={target} graphType={graphType} wells={wells} />
 }

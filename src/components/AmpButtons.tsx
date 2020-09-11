@@ -12,7 +12,8 @@ const AmpButton: React.FC<BaseAmpButtonProps> = ({ determination, amplification,
 
     const style: React.CSSProperties = {
         backgroundColor: isToggled ? color : 'white',
-        color: isToggled ? 'white' : color
+        color: isToggled ? 'white' : color,
+        width: 80
     }
 
     const onClick = () => {

@@ -6,10 +6,11 @@
     "@tensorflow/tfjs": "^2.3.0",
     "antd": "^4.6.1",
     "chart.js": "^2.9.3",
+    "d3": "^6.1.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.4.3"
+    "react-scripts": "^3.4.3"
   },
   "main": "build/main.js",
   "scripts": {
@@ -36,18 +37,19 @@
     ]
   },
   "devDependencies": {
-    "@types/antd": "^1.0.0",
-    "@types/chart.js": "^2.9.24",
-    "@types/react-router-dom": "^5.1.5",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.54",
-    "@types/react": "^16.9.47",
-    "@types/react-dom": "^16.9.8",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "@types/antd": "^1.0.0",
+    "@types/chart.js": "^2.9.24",
+    "@types/d3": "^5.7.2",
+    "@types/jest": "^24.9.1",
+    "@types/node": "^12.12.57",
+    "@types/react": "^16.9.49",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-router-dom": "^5.1.5",
     "eslint": "^6.6.0",
     "eslint-plugin-typescript": "^0.14.0",
-    "typescript": "^3.7.5"
+    "typescript": "^3.9.7"
   }
 }

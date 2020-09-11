@@ -1,11 +1,8 @@
 import React, { useContext } from 'react'
 import { Button, Input, Spin } from 'antd'
-import QuantExportParser from '../services/QuantExportParser'
 import { ImportOutlined } from '@ant-design/icons'
-import CovidDetector from '../services/CovidDetector'
 import { PlateContext } from '../contexts/PlateContext'
-import InvalidDetector from '../services/InvalidDetector'
-import { SampleDetermination, SampleRns } from '../types'
+import importQuantFile from '../services/ImportQuantFile'
 
 const ImportQuantFileButton: React.FC = () => {
     const { setDeterminations, setRns, setFile, file, determinations } = useContext(PlateContext)
@@ -21,40 +18,12 @@ const ImportQuantFileButton: React.FC = () => {
         setFile(file)
         setDeterminations([])
 
-        const samples = await QuantExportParser(file)
+        const samples = await importQuantFile(file)
 
-        const invalid_promises = samples.map(async (s) => {
-            const [prediction, confidence] = await InvalidDetector(s)
+        setDeterminations(samples.map(({ sample_id, determination, prediction, confidence, amplifications, well, evaluated }) =>
+            ({ sample_id, determination, prediction, confidence, amplifications, well, evaluated })))
 
-            return { ...s, prediction, confidence, determination: prediction }
-        })
-
-        const invalid_resolved = await Promise.all(invalid_promises)
-
-        const sample_prediction_promises = invalid_resolved.map(async (s) => {
-            if (s.prediction === 'Repeat') return s
-
-            const [prediction, confidence] = await CovidDetector(s)
-
-            return { ...s, prediction, confidence, determination: prediction }
-        })
-
-        const sample_predictions = await Promise.all(sample_prediction_promises)
-        const sample_determinations: SampleDetermination[] = sample_predictions
-            .map(({ well, id, prediction, confidence }) => ({
-                well,
-                sample_id: id,
-                prediction,
-                confidence,
-                determination: prediction,
-                evaluated: false,
-                amplifications: prediction === 'Detected' ? ['S Gene', 'N Gene', 'ORF1ab'] : []
-            }))
-
-        const sample_rns: SampleRns = sample_predictions.reduce((acc, val) => ({ ...acc, [val.well]: val.rns }), {})
-
-        setDeterminations(sample_determinations)
-        setRns(sample_rns)
+        setRns(samples.reduce((acc, { well, rns }) => ({ ...acc, [well]: rns }), {}))
     }
 
     return (
