@@ -56,7 +56,6 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
 
         return s
     })
-    console.log(thresholded_samples)
     const repeated_samples = await applyRepeatAi(thresholded_samples)
     const detected_samples = await applyCovidAi(repeated_samples)
 
