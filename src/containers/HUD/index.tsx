@@ -5,18 +5,17 @@ import Home from '../Home'
 import Plate from '../Plate'
 import Rows from '../Rows'
 import Elution from '../Elution'
+import AppHeader from './AppHeader'
 
 const { Header, Content, Footer } = Layout
 
 export const AppRouter = () => (
-
     <Switch>
         <Route path='/' exact={true} component={Home} />
         <Route path='/plate' component={Plate} />
         <Route path='/rows' component={Rows} />
-        <Route path='/rows' component={Elution} />
+        <Route path='/elution' component={Elution} />
     </Switch>
-
 )
 
 export const HUD: React.FC = () => {
@@ -33,8 +32,11 @@ export const HUD: React.FC = () => {
                 </div>
             </Header>
 
-            <Content style={{ padding: '0 30px', marginTop: 94 }} className="site-layout">
+            <Content style={{ padding: '0 30px', marginTop: 79 }} className="site-layout">
+                <AppHeader />
+
                 <AppRouter />
+
                 <Footer style={{ textAlign: 'center' }}>Gravity Diagnostics ©2020</Footer>
             </Content>
         </Layout>
@@ -50,11 +52,11 @@ const Navigation: React.FC = () => {
             <Menu.Item key="plate">
                 <Link to='plate'>Plate</Link>
             </Menu.Item>
-            <Menu.Item key="rows">
-                <Link to='rows'>Rows</Link>
-            </Menu.Item>
             <Menu.Item key="elution">
                 <Link to='elution'>Elution</Link>
+            </Menu.Item>
+            <Menu.Item key="rows">
+                <Link to='rows'>Rows</Link>
             </Menu.Item>
         </Menu>
     )

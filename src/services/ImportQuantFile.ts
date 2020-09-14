@@ -1,6 +1,5 @@
 import { Sample } from "../types"
 import CovidDetector from "./CovidDetector"
-import InvalidDetector from "./InvalidDetector"
 import QuantExportParser from "./QuantExportParser"
 
 const applyCovidAi = async (samples: Sample[]): Promise<Sample[]> => {
@@ -22,17 +21,17 @@ const applyCovidAi = async (samples: Sample[]): Promise<Sample[]> => {
     }))
 }
 
-const applyRepeatAi = async (samples: Sample[]): Promise<Sample[]> => {
-    const invalid_promises = samples.map(async (s) => {
-        if (s.prediction === 'Repeat') return s
+// const applyRepeatAi = async (samples: Sample[]): Promise<Sample[]> => {
+//     const invalid_promises = samples.map(async (s) => {
+//         if (s.prediction === 'Repeat') return s
 
-        const [prediction, confidence] = await InvalidDetector(s)
+//         const [prediction, confidence] = await InvalidDetector(s)
 
-        return { ...s, prediction, confidence, determination: prediction }
-    })
+//         return { ...s, prediction, confidence, determination: prediction }
+//     })
 
-    return await Promise.all(invalid_promises)
-}
+//     return await Promise.all(invalid_promises)
+// }
 
 const applyMS2Threshold = (samples: Sample[]): Sample[] =>
     samples.map(s => s.rns.ms2_delta.slice(0, 37).some(r => r > 50000) ? { ...s, amplifications: [...s.amplifications, 'MS2'] } : s)
@@ -56,8 +55,8 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
 
         return s
     })
-    const repeated_samples = await applyRepeatAi(thresholded_samples)
-    const detected_samples = await applyCovidAi(repeated_samples)
+    // const repeated_samples = await applyRepeatAi(thresholded_samples)
+    const detected_samples = await applyCovidAi(thresholded_samples)
 
     return detected_samples
 }

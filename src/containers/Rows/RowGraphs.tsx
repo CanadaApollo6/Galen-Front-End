@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { AmpChart } from '../../components/AmpChart'
 import { ContextGraphOptions } from '../../components/GraphOptions'
+import { SampleDetermination } from '../../types'
 import { RowsContext } from './RowsContext'
 
 const RowGraph: React.FC = () => {
@@ -15,23 +16,30 @@ const RowGraph: React.FC = () => {
     )
 }
 
-const SampleGraph: React.FC = () => {
-    const { selected } = useContext(RowsContext)
-    const sample_text = selected ? `${selected.well} (${selected.sample_id})` : 'None Selected'
+type SampleGraphProps = { sample: SampleDetermination | undefined }
+
+export const SampleGraph: React.FC<SampleGraphProps> = ({ sample }) => {
+    const sample_text = sample ? `${sample.well} (${sample.sample_id})` : 'None Selected'
 
     return (
         <>
             <h2>Sample - {sample_text}</h2>
-            <AmpChart determinations={selected ? [selected] : []} />
+            <AmpChart determinations={sample ? [sample] : []} />
         </>
     )
+}
+
+const RowContextSampleGraph: React.FC = () => {
+    const { selected } = useContext(RowsContext)
+
+    return <SampleGraph sample={selected} />
 }
 
 const RowGraphs: React.FC = () => (
     <>
         <ContextGraphOptions />
         <RowGraph />
-        <SampleGraph />
+        <RowContextSampleGraph />
     </>
 )
 

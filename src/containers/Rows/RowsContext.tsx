@@ -47,8 +47,10 @@ export const RowsContextProvider: React.FC = ({ children }) => {
             .map(({ well, prediction }): [string, number] => [well.substring(0, 1), prediction === 'Detected' ? 1 : 0])
             .reduce((acc: Record<string, number>, [row, pos]) => ({ ...acc, [row]: acc[row] ? acc[row] + pos : pos }), {})
 
-        setRows(Object.keys(row_dictionary).map(key => [key, row_dictionary[key]]))
-    }, [d, setRows])
+        const r: [string, number][] = Object.keys(row_dictionary).map(key => [key, row_dictionary[key]])
+
+        setRows(r)
+    }, [d, setRows, setRow])
 
     return (
         <RowsContext.Provider value={{ selected, setSelected, row, setRow, showEvaluated, setShowEvaluated, determinations, rows }}>

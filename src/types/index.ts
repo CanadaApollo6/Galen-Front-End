@@ -8,7 +8,8 @@ export type Rns = Record<RnType, number[]>
 
 export type SampleDetermination = {
     sample_id: string,
-    well: string
+    well: string,
+    elution: number,
     determination: Determination | undefined,
     prediction: Determination | undefined
     confidence: number,
@@ -23,6 +24,7 @@ export type SampleRns = Record<string, Rns>
 export type ExportSample = {
     sample_id: string,
     well: string
+    elution: number
     rns: Rns
 }
 
@@ -31,6 +33,7 @@ export type GraphType = 'linear' | 'logarithmic'
 export type Sample = {
     sample_id: string,
     well: string
+    elution: number
     determination: Determination | undefined,
     prediction: Determination | undefined
     confidence: number,

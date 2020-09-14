@@ -54,7 +54,12 @@ const columns: ColumnsType<SampleDetermination> = [
 const RowTable = () => {
     const { determinations, selected, setSelected } = useContext(RowsContext)
 
-    return <Table rowKey='well' columns={columns} dataSource={determinations} rowSelection={{ type: 'radio', selectedRowKeys: selected ? [selected.well] : [], onSelect: setSelected }} />
+    return <Table
+        rowKey='well'
+        columns={columns}
+        dataSource={determinations}
+        rowSelection={{ type: 'radio', selectedRowKeys: selected ? [selected.well] : [], onSelect: setSelected }}
+    />
 }
 
 export default RowTable

@@ -13,7 +13,6 @@ const EvaluatedButton: React.FC<EvaluatedButtonProps> = ({ determination }) => {
 
     const setEvaluated = (evaluated: boolean) => {
         setDeterminations(determinations.map(d => d.well === determination.well ? { ...determination, evaluated } : d))
-        console.log(determination.well === selected?.well, showEvaluated === '0', evaluated)
         if (determination.well === selected?.well && showEvaluated === '0' && evaluated) setSelected(undefined)
     }
 

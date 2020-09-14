@@ -76,6 +76,8 @@ const parseQuantExport = async (file: File): Promise<QuantExport> => {
     return quant_export
 }
 
+const getElutionPlate = (i: number) => parseInt((i % 48 > 23 ? '1' : '0') + (i % 2 ? '1' : '0'), 2) + 1
+
 export default async (file: File): Promise<ExportSample[]> => {
     const quant_export = await parseQuantExport(file)
 
@@ -104,9 +106,12 @@ export default async (file: File): Promise<ExportSample[]> => {
         samples_rns[amplification.well][delta].push(amplification.delta)
     }
 
-    return quant_export.results.filter(q => q.target === 'MS2').map((q): ExportSample => ({
+    const samples = quant_export.results.filter(q => q.target === 'MS2').map((q, i): ExportSample => ({
         sample_id: q.sample_id,
         well: q.well_position,
+        elution: getElutionPlate(i),
         rns: samples_rns[q.well]
     }))
+
+    return samples
 }

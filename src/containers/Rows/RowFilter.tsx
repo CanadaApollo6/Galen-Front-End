@@ -4,14 +4,14 @@ import { RowsContext } from './RowsContext'
 import PlateProgress from '../../components/PlateProgress'
 
 const RowFilter = () => {
-    const { rows, setRow, showEvaluated, setShowEvaluated } = useContext(RowsContext)
+    const { rows, row, setRow, showEvaluated, setShowEvaluated } = useContext(RowsContext)
 
     return (
         <Form>
             <Row gutter={15}>
                 <Col span={8}>
                     <Form.Item label='Row'>
-                        <Select onChange={(v) => setRow(v.toString())}>
+                        <Select value={row} onChange={(v) => setRow(v.toString())}>
                             {rows.map(([r, n]) => (
                                 <Select.Option value={r}>
                                     <div style={{ float: 'left' }}>
