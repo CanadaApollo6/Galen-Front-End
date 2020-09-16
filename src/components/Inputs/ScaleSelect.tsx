@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Select } from 'antd'
 import { GraphContext } from '../../contexts/GraphContext'
 
-export const ContextScaleSelect = () => {
+export const ContextScaleSelect: React.FC = () => {
     const { scale, setScale, scales } = useContext(GraphContext)
 
     return (

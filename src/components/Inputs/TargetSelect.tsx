@@ -9,10 +9,10 @@ export const ContextTargetSelect: React.FC = () => {
     return <TargetSelect target={target} setTarget={setTarget} />
 }
 
-type TargetSelectProps = { target: RnDeltaType | undefined, setTarget: React.Dispatch<RnDeltaType | undefined> }
+type TargetSelectProps = { target: RnDeltaType | undefined | '', setTarget: React.Dispatch<RnDeltaType | '' | undefined> }
 
 export const TargetSelect: React.FC<TargetSelectProps> = ({ target, setTarget }) =>
-    <Select value={target} defaultValue={''} onChange={v => setTarget(v === '' ? undefined : v)}>
+    <Select value={target} defaultValue={''} onChange={v => setTarget(v)}>
         <Select.Option value=''>All</Select.Option>
         <Select.Option value='rp_cy5_delta'>RP-Cy5</Select.Option>
         <Select.Option value='n_gene_delta'>N Gene</Select.Option>

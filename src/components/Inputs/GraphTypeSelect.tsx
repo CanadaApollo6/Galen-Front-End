@@ -3,7 +3,7 @@ import { Select } from 'antd'
 import { GraphType } from '../../types'
 import { GraphContext } from '../../contexts/GraphContext'
 
-export const ContextGraphTypeSelect = () => {
+export const ContextGraphTypeSelect: React.FC = () => {
     const { graphType, setGraphType } = useContext(GraphContext)
 
     return <GraphTypeSelect graphType={graphType} setGraphType={setGraphType} />

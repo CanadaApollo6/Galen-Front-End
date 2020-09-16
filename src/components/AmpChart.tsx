@@ -4,7 +4,7 @@ import { PlateContext } from '../contexts/PlateContext'
 import { SampleDetermination, RnDeltaType, SampleRns } from '../types'
 import { GraphContext } from '../contexts/GraphContext'
 
-const getDataSets = (rns: SampleRns, wells: string[], target: RnDeltaType | undefined): Chart.ChartDataSets[] => {
+const getDataSets = (rns: SampleRns, wells: string[], target: RnDeltaType | '' | undefined): Chart.ChartDataSets[] => {
     const config: Record<RnDeltaType, { color: string, label: string }> = {
         rp_cy5_delta: { color: 'brown', label: 'RP-Cy5' },
         n_gene_delta: { color: 'blue', label: 'N Gene' },
@@ -22,7 +22,7 @@ const getDataSets = (rns: SampleRns, wells: string[], target: RnDeltaType | unde
     ).flat()
 }
 
-export type SampleChartProps = { scale: number | undefined, target: RnDeltaType | undefined, wells: string[], graphType: 'linear' | 'logarithmic' }
+export type SampleChartProps = { scale: number | undefined, target: RnDeltaType | undefined | '', wells: string[], graphType: 'linear' | 'logarithmic' }
 
 export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphType, wells }) => {
     const { rns } = useContext(PlateContext)
