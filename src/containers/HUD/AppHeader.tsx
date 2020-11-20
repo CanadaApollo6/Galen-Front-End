@@ -1,4 +1,4 @@
-import { PageHeader } from 'antd'
+import { PageHeader, Statistic, Row } from 'antd';
 import React, { useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import ExportButton from '../../components/ExportButton'
@@ -24,14 +24,36 @@ const AppHeader: React.FC = () => {
         }
     }
 
+    if (title() === 'Rows') {
+        return (
+            <PageHeader 
+                ghost={false}
+                title={title()}
+                subTitle={file?.name.match(/\d{6}-COV\d{1,2}-[A-Z]/g) ?? 'No file loaded'}
+                style={{ marginBottom: 15 }}
+                extra={[<ExportButton />, <ImportQuantFileButton />]}>
+            </PageHeader>
+        )
+    }
+
     return (
-        <PageHeader
+        <PageHeader 
             ghost={false}
             title={title()}
             subTitle={file?.name.match(/\d{6}-COV\d{1,2}-[A-Z]/g) ?? 'No file loaded'}
             style={{ marginBottom: 15 }}
-            extra={[<ExportButton />, <ImportQuantFileButton />]}
-        />
+            extra={[<ExportButton />, <ImportQuantFileButton />]}>
+            {}
+                <Row>
+                    <Statistic title="Not Detected" value="Blue" />
+                    <Statistic title="Detected" value="Red" style={{ margin: '0 32px' }} />
+                    <Statistic title="Repeat" value="Yellow" />
+                    <Statistic title="Inconclusive" value="Orange" style={{ margin: '0 32px' }}/>
+                    <Statistic title="Invalid" value="Purple"/>
+                    <Statistic title="Control" value="Grey" style={{ margin: '0 32px' }}/>
+                </Row>
+        </PageHeader>
+            
     )
 }
 
