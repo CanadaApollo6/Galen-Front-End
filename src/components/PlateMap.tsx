@@ -2,10 +2,13 @@ import React from 'react'
 import { SampleDetermination } from '../types'
 
 const getSquareColor = (d: SampleDetermination, selectedWells: SampleDetermination[] | undefined): string => {
-    if (selectedWells?.some(w => w.well === d.well)) return 'blue'
+    if (selectedWells?.some(w => w.well === d.well)) return 'white'
     if (['neg', 'PC'].includes(d.sample_id)) return 'grey'
-    if (d.determination === 'Detected') return 'red'
+    if (d.determination === 'Detected') return 'crimson'
     if (d.determination === 'Repeat') return 'yellow'
+    if (d.determination === 'Inconclusive') return 'orange'
+    if (d.determination === 'Invalid') return 'mediumpurple'
+    if (d.determination === 'Not Detected') return 'skyblue'
 
     return ''
 }
@@ -14,7 +17,7 @@ type SampleSquareProps = { sample: SampleDetermination, onSelect?: (sample: Samp
 
 const SampleSquare: React.FC<SampleSquareProps> = ({ sample, onSelect, selectedWells }) => (
     <div style={{ display: 'table-cell' }}>
-        <div onClick={onSelect ? () => onSelect(sample) : () => undefined} style={{ paddingTop: '100%', background: getSquareColor(sample, selectedWells), border: '2px solid #d9d9d9', position: 'relative', margin: -1 }}>
+        <div onClick={onSelect ? () => onSelect(sample) : () => undefined} style={{ paddingTop: '100%', background: getSquareColor(sample, selectedWells), border: '2px solid #d0d0d0', position: 'relative', margin: -1 }}>
             <span style={{ position: 'absolute', top: 5, bottom: 0, left: 5, right: 0 }}>{sample.well}</span>
         </div>
     </div>
