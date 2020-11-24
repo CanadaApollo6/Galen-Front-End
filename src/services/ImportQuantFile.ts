@@ -384,15 +384,14 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
 
     const sample_negs: string[] = [];
     const sample_pcs: string[] = [];
-    sample_ids.map((s) => {
+    for (const s of sample_ids) {
         if (s === "neg") {
             sample_negs.push(s);
         }
         if (s === "pc") {
             sample_pcs.push(s);
         }
-    });
-
+    }
     // Are there exactly 7 negative controls?
     if (sample_negs.length !== 7) {
         alerts.push(
