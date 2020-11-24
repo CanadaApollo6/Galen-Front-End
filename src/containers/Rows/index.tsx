@@ -10,7 +10,7 @@ const Rows: React.FC = () => (
     <RowsContextProvider>
         <GraphContextProvider>
             <Row gutter={15}>
-                <Col span={15}>
+                <Col span={17}>
                     <Card>
                         <RowFilter />
                         <Divider />
@@ -18,7 +18,7 @@ const Rows: React.FC = () => (
                     </Card>
                 </Col>
 
-                <Col span={9}>
+                <Col span={7}>
                     <Card>
                         <RowGraphs />
                     </Card>
