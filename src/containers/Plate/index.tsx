@@ -15,7 +15,7 @@ export default () => {
         notDetected: determinations.filter(d => d.determination === "Not Detected").length,
         detected: determinations.filter(d => d.determination === "Detected").length,
         repeat: determinations.filter(d => d.determination === "Repeat").length,
-        inconclusive: determinations.filter(d => d.determination === "Inconclusive").length - determinations.filter(d => d.sample_id === "neg" || d.sample_id === "pc").length,
+        inconclusive: determinations.filter(d => d.determination === "Inconclusive").length,
         invalid: determinations.filter(d => d.determination === "Invalid").length,
         control: determinations.filter(d => d.sample_id === "neg" || d.sample_id === "pc").length
     }
