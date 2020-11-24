@@ -285,6 +285,34 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
     detected_samples,
     await aggregatedSamples(samples)
   );
+  const sample_ids = [];
+  for (const c of comparedResults) {
+    sample_ids.push(c.sample_id);
+    if (c.sample_id === "pc" && c.well !== "p24") {
+      alert(
+        "NOTE: The positive control is in well " + c.well + " and not well P24."
+      );
+    }
+    if (c.sample_id === "pc" && c.prediction !== "Detected") {
+      alert(
+        "NOTE: The positive control in well " +
+          c.well +
+          " did not return a detected result."
+      );
+    }
+    if (c.sample_id === "neg" && c.prediction !== "Repeat") {
+      alert(
+        "NOTE: A negative control in well " +
+          c.well +
+          " returned a " +
+          c.prediction +
+          " result."
+      );
+    }
+  }
+  if (!sample_ids.includes("pc")) {
+    alert("NOTE: This plate does not appear to contain a positive control.");
+  }
   return comparedResults;
 };
 
