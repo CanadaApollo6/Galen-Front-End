@@ -18,7 +18,7 @@ type SampleSquareProps = { sample: SampleDetermination, onSelect?: (sample: Samp
 const SampleSquare: React.FC<SampleSquareProps> = ({ sample, onSelect, selectedWells }) => (
     <div style={{ display: 'table-cell' }}>
         <div onClick={onSelect ? () => onSelect(sample) : () => undefined} style={{ paddingTop: '100%', background: getSquareColor(sample, selectedWells), border: '2px solid #d0d0d0', position: 'relative', margin: -1 }}>
-            <span style={{ position: 'absolute', top: 5, bottom: 0, left: 5, right: 0 }}>{sample.well}</span>
+            <span style={{ position: 'absolute', top: 7, bottom: 0, left: 6, right: 0 }}>{sample.well}</span>
         </div>
     </div>
 )
