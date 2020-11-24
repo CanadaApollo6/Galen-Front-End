@@ -41,6 +41,8 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
                 ]
             },
             options: {
+                maintainAspectRatio: true,
+                aspectRatio: 1.9,
                 tooltips: {
                     mode: 'index',
                     enabled: true,
@@ -59,7 +61,8 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
                         type: graphType,
                         ticks: {
                             beginAtZero: false,
-                            max: 1000000
+                            max: 1000000,
+                            padding: 5,
                         },
                     },],
                 },

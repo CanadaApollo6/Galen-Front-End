@@ -23,7 +23,7 @@ export const SampleGraph: React.FC<SampleGraphProps> = ({ sample }) => {
 
     return (
         <>
-            <h2>Sample - {sample_text}</h2>
+            <h2 style={{marginTop: 10}}>Sample - {sample_text}</h2>
             <AmpChart determinations={sample ? [sample] : []} />
         </>
     )
