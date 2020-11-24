@@ -286,32 +286,66 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
     await aggregatedSamples(samples)
   );
   const sample_ids = [];
+  const alerts: string[] = [];
   for (const c of comparedResults) {
     sample_ids.push(c.sample_id);
-    if (c.sample_id === "pc" && c.well !== "p24") {
-      alert(
-        "NOTE: The positive control is in well " + c.well + " and not well P24."
+    if (
+      c.sample_id === "neg" &&
+      c.well !== "O21" &&
+      c.well !== "O22" &&
+      c.well !== "O23" &&
+      c.well !== "O24" &&
+      c.well !== "P21" &&
+      c.well !== "P22" &&
+      c.well !== "P23"
+    ) {
+      alerts.push(
+        "NOTE: There appears to be a negative sample in well " +
+          c.well +
+          "." +
+          "\n"
+      );
+    }
+    if (c.sample_id === "pc" && c.well !== "P24") {
+      alerts.push(
+        "NOTE: The positive control is in well " +
+          c.well +
+          " and not well P24." +
+          "\n"
       );
     }
     if (c.sample_id === "pc" && c.prediction !== "Detected") {
-      alert(
+      alerts.push(
         "NOTE: The positive control in well " +
           c.well +
-          " did not return a detected result."
+          " did not return a detected result." +
+          "\n"
       );
     }
     if (c.sample_id === "neg" && c.prediction !== "Repeat") {
-      alert(
+      alerts.push(
         "NOTE: A negative control in well " +
           c.well +
           " returned a " +
           c.prediction +
-          " result."
+          " result." +
+          "\n"
       );
     }
   }
   if (!sample_ids.includes("pc")) {
-    alert("NOTE: This plate does not appear to contain a positive control.");
+    alerts.push(
+      "NOTE: This plate does not appear to contain a positive control." + "\n"
+    );
+  }
+  if (!sample_ids.includes("neg")) {
+    alerts.push(
+      "NOTE: This plate does not appear to contain any negative controls." +
+        "\n"
+    );
+  }
+  if (alerts.length > 0) {
+    alert(alerts.toString().replaceAll(",", ""));
   }
   return comparedResults;
 };
