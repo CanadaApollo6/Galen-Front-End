@@ -392,6 +392,16 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
     );
   }
 
+  // Are there 8 controls in total?
+  if (sample_pcs.length + sample_negs.length !== 8) {
+    alerts.push(
+      "NOTE: There are " +
+        (sample_pcs.length + sample_negs.length) +
+        " control samples in this plate instead of 8." +
+        "\n"
+    );
+  }
+
   // Are there any messages to alert the lab tech about?
   if (alerts.length > 0) {
     alert(alerts.toString().replaceAll(",", ""));
