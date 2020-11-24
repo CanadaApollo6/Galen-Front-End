@@ -35,11 +35,11 @@ export default () => {
                 </Col>
 
                 <Col span={9}>
-                    <Card>
+                    <Card style={{marginTop: 0}}>
                         <ContextGraphOptions />
                         <SampleGraph sample={determination} />
                     </Card>
-                    <Card style={{marginTop: 15}}>
+                    <Card style={{marginTop: 3}} size="small">
                         <h1>Statistics</h1>
                         <Row>
                             <Statistic title="Not Detected" value={statistics.notDetected} />
@@ -48,6 +48,17 @@ export default () => {
                             <Statistic title="Inconclusive" value={statistics.inconclusive} style={{ margin: '0 20px' }}/>
                             <Statistic title="Invalid" value={statistics.invalid}/>
                             <Statistic title="Controls" value={statistics.control} style={{ margin: '0 20px' }}/>
+                        </Row>
+                    </Card>
+                    <Card style={{marginTop: 3}} size="small">
+                        <h1>Graph Color Key</h1>
+                        <Row>
+                            <Statistic title="N Gene" value="Blue" />
+                            <Statistic title="S Gene" value="Green" style={{ margin: '0 20px' }} />
+                            <Statistic title="ORF1ab" value="Red" />
+                            <Statistic title="MS2" value="Orange" style={{ margin: '0 20px' }}/>
+                            <Statistic title="RP-Cy5" value="Maroon"/>
+                            <Statistic title="50K Guide" value="Black" style={{ margin: '0 20px' }}/>
                         </Row>
                     </Card>
                 </Col>
