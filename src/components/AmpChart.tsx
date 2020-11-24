@@ -36,11 +36,16 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
             data: {
                 labels: new Array(40).fill(0).map((x, i) => i),
                 datasets: [
-                    { label: '50k Guide', data: new Array(40).fill(50000), borderColor: 'black', borderWidth: 5, borderDash: [10, 5], fill: false, hideInLegendAndTooltip: true },
+                    { label: '50k Guide', data: new Array(40).fill(50000), borderColor: 'black', borderWidth: 2, borderDash: [10, 5], fill: false, hideInLegendAndTooltip: true },
                     ...datasets
                 ]
             },
             options: {
+                tooltips: {
+                    mode: 'index',
+                    enabled: true,
+                    intersect: false,
+                },
                 legend: {
                     display: false
                 },
@@ -54,12 +59,12 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
                         type: graphType,
                         ticks: {
                             beginAtZero: false,
-                            max: scale
-                        }
-                    }]
-                }
-            }
-        })
+                            max: 1000000
+                        },
+                    },],
+                },
+            },
+        },)
     }, [rns, wells, target, graphType, scale])
 
     return (
