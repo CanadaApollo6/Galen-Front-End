@@ -304,7 +304,7 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
       c.well !== "P23"
     ) {
       alerts.push(
-        "NOTE: There appears to be a negative sample in well " +
+        "NOTE: There appears to be a negative control in well " +
           c.well +
           "." +
           "\n"
