@@ -1,8 +1,8 @@
-import React from 'react'
-import { HUD } from './containers/HUD'
-import { PlateContextProvider } from './contexts/PlateContext'
-import { BrowserRouter as Router } from 'react-router-dom'
-import 'antd/dist/antd.css'
+import React from "react";
+import { HUD } from "./containers/HUD";
+import { PlateContextProvider } from "./contexts/PlateContext";
+import { BrowserRouter as Router } from "react-router-dom";
+import "antd/dist/antd.css";
 
 const App = () => (
     <PlateContextProvider>
@@ -10,6 +10,6 @@ const App = () => (
             <HUD />
         </Router>
     </PlateContextProvider>
-)
+);
 
-export default App
+export default App;

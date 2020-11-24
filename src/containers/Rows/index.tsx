@@ -1,10 +1,10 @@
-import React from 'react'
-import { Card, Row, Col, Divider } from 'antd'
-import { GraphContextProvider } from '../../contexts/GraphContext'
-import { RowsContextProvider } from './RowsContext'
-import RowTable from './RowTable'
-import RowFilter from './RowFilter'
-import RowGraphs from './RowGraphs'
+import React from "react";
+import { Card, Row, Col, Divider } from "antd";
+import { GraphContextProvider } from "../../contexts/GraphContext";
+import { RowsContextProvider } from "./RowsContext";
+import RowTable from "./RowTable";
+import RowFilter from "./RowFilter";
+import RowGraphs from "./RowGraphs";
 
 const Rows: React.FC = () => (
     <RowsContextProvider>
@@ -24,8 +24,8 @@ const Rows: React.FC = () => (
                     </Card>
                 </Col>
             </Row>
-        </GraphContextProvider >
+        </GraphContextProvider>
     </RowsContextProvider>
-)
+);
 
-export default Rows
+export default Rows;
