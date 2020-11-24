@@ -426,7 +426,7 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
     if (alerts.length > 0) {
         alert(alerts.toString().replaceAll(",", ""));
     }
-    if (alerts.length == 0) {
+    if (alerts.length === 0) {
         alert("All initial control checks passed!");
     }
     return comparedResults;
