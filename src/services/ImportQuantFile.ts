@@ -285,10 +285,14 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
     detected_samples,
     await aggregatedSamples(samples)
   );
+
+  // Control check alert system
   const sample_ids = [];
   const alerts: string[] = [];
   for (const c of comparedResults) {
     sample_ids.push(c.sample_id);
+
+    // Are negative controls in the correct wells?
     if (
       c.sample_id === "neg" &&
       c.well !== "O21" &&
@@ -306,6 +310,8 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
           "\n"
       );
     }
+
+    // Is the positive control in well P24?
     if (c.sample_id === "pc" && c.well !== "P24") {
       alerts.push(
         "NOTE: The positive control is in well " +
@@ -314,14 +320,20 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
           "\n"
       );
     }
+
+    // Is the positive control actually positive?
     if (c.sample_id === "pc" && c.prediction !== "Detected") {
       alerts.push(
         "NOTE: The positive control in well " +
           c.well +
-          " did not return a detected result." +
+          " returned a " +
+          c.prediction +
+          " result." +
           "\n"
       );
     }
+
+    // Are the negative controls actually negative?
     if (c.sample_id === "neg" && c.prediction !== "Repeat") {
       alerts.push(
         "NOTE: A negative control in well " +
@@ -333,17 +345,54 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
       );
     }
   }
+
+  // Does a labelled positive control exist?
   if (!sample_ids.includes("pc")) {
     alerts.push(
       "NOTE: This plate does not appear to contain a positive control." + "\n"
     );
   }
+
+  // Do labelled negative controls exist?
   if (!sample_ids.includes("neg")) {
     alerts.push(
       "NOTE: This plate does not appear to contain any negative controls." +
         "\n"
     );
   }
+
+  const sample_negs: string[] = [];
+  const sample_pcs: string[] = [];
+  sample_ids.map((s) => {
+    if (s === "neg") {
+      sample_negs.push(s);
+    }
+    if (s === "pc") {
+      sample_pcs.push(s);
+    }
+  });
+
+  // Are there exactly 7 negative controls?
+  if (sample_negs.length !== 7) {
+    alerts.push(
+      "NOTE: There appear to be " +
+        sample_negs.length +
+        " negative controls when there should be 7." +
+        "\n"
+    );
+  }
+
+  // Is there more than 1 positive control?
+  if (sample_pcs.length > 1) {
+    alerts.push(
+      "NOTE: There appear to be " +
+        sample_pcs.length +
+        " positive controls when there should only be 1." +
+        "\n"
+    );
+  }
+
+  // Are there any messages to alert the lab tech about?
   if (alerts.length > 0) {
     alert(alerts.toString().replaceAll(",", ""));
   }
