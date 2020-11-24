@@ -65,6 +65,11 @@ export const SampleChart: React.FC<SampleChartProps> = ({ scale, target, graphTy
                             padding: 5,
                         },
                     },],
+                    xAxes: [{
+                        ticks: {
+                            padding: 5
+                        }
+                    }]
                 },
             },
         },)
