@@ -19,8 +19,8 @@ const Elution: React.FC = () => {
                                 <Col span={16}>
                                     <h1>Statistcs</h1>
                                     <h3>Not Detected: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Not Detected").length}</h3>
-                                    <h3>Detected: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Detected").length}</h3>
-                                    <h3>Repeat: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Repeat").length}</h3>
+                                    <h3>Detected: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Detected" && d.sample_id !== "neg" && d.sample_id !== "pc").length}</h3>
+                                    <h3>Repeat: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Repeat" && d.sample_id !== "neg" && d.sample_id !== "pc").length}</h3>
                                     <h3>Inconclusive: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Inconclusive").length}</h3>
                                     <h3>Invalid: {(determinations.filter(d => d.elution === e)).filter(d => d.determination === "Invalid").length}</h3>
                                     <h3>Controls: {(determinations.filter(d => d.elution === e)).filter(d => d.sample_id === "neg" || d.sample_id === "pc").length}</h3>
