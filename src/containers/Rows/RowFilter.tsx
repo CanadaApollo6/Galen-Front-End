@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Row, Col, Form, Select, Badge, Button } from 'antd'
+import { Row, Col, Form, Select, Badge } from 'antd'
 import { RowsContext } from './RowsContext'
 import PlateProgress from '../../components/PlateProgress'
 
@@ -37,39 +37,6 @@ const RowFilter = () => {
 
                 <Col span={8}>
                     <PlateProgress />
-                </Col>
-            </Row>
-            <Row gutter={15}>
-                <Col span={8}>
-                    <Form.Item label='Select Rows'>
-                        <Select mode='multiple' allowClear style={{width: '100%'}} placeholder="Select Rows...">
-                            {rows.map(([r, n]) => (
-                                <Select.Option value={r}>
-                                    <div style={{ float: 'left' }}>
-                                        <span>{r}</span>
-                                    </div>
-                                </Select.Option>
-                            ))}
-                        </Select>
-                    </Form.Item>
-                    
-                    
-                </Col>
-                <Col span={8}>
-                    <Form.Item label="Set Row Determination">
-                        <Select placeholder="Set Result..." allowClear style={{width: '100%'}}>
-                            <Select.Option value="Detected">Detected</Select.Option>
-                            <Select.Option value="Not Detected">Not Detected</Select.Option>
-                            <Select.Option value="Invalid">Invalid</Select.Option>
-                            <Select.Option value="Inconclusive">Inconclusive</Select.Option>
-                            <Select.Option value="Repeat">Repeat</Select.Option>
-                        </Select>
-                    </Form.Item>
-                </Col>
-                <Col span={8}>
-                    <Form.Item label="Submit Rows As Evaluated">
-                        <Button type="primary" style={{width: '100%'}}>Submit</Button>
-                    </Form.Item>
                 </Col>
             </Row>
         </Form>
