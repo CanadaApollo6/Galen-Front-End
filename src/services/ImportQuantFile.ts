@@ -128,12 +128,12 @@ const applyRP_Cy5Detector = async (samples: Sample[]): Promise<Sample[]> => {
 //     return await Promise.all(invalid_promises)
 // }
 
-const applyMS2Threshold = (samples: Sample[]): Sample[] =>
-    samples.map((s) =>
-        s.rns.ms2_delta.slice(0, 37).some((r) => r > 50000)
-            ? { ...s, amplifications: [...s.amplifications, "MS2"] }
-            : s
-    );
+// const applyMS2Threshold = (samples: Sample[]): Sample[] =>
+//     samples.map((s) =>
+//         s.rns.ms2_delta.slice(0, 37).some((r) => r > 50000)
+//             ? { ...s, amplifications: [...s.amplifications, "MS2"] }
+//             : s
+//     );
 
 // const applyRPCy5Threshold = (samples: Sample[]): Sample[] =>
 //      samples.map(s => s.rns.rp_cy5_delta.slice(0, 37).some(r => r > 50000) ? { ...s, amplifications: [...s.amplifications, 'RP-Cy5'] } : s)
