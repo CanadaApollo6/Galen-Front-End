@@ -1,23 +1,23 @@
-import React, { useContext } from "react";
-import { PlateContext } from "../../contexts/PlateContext";
-import { Select } from "antd";
-import { Determination, SampleDetermination, Amplification } from "../../types";
+import React, { useContext } from 'react'
+import { PlateContext } from '../../contexts/PlateContext'
+import { Select } from 'antd'
+import { Determination, SampleDetermination, Amplification } from '../../types'
 
 const DeterminationSelect: React.FC<{ sample: SampleDetermination }> = ({
     sample,
 }) => {
-    const { determinations, setDeterminations } = useContext(PlateContext);
+    const { determinations, setDeterminations } = useContext(PlateContext)
     const options: Determination[] = [
-        "Detected",
-        "Not Detected",
-        "Invalid",
-        "Inconclusive",
-        "Repeat",
-    ];
+        'Detected',
+        'Not Detected',
+        'Invalid',
+        'Inconclusive',
+        'Repeat',
+    ]
 
     const onChange = (determination: Determination) => {
         const amplifications: Amplification[] =
-            determination === "Detected" ? ["N Gene", "S Gene", "ORF1ab"] : [];
+            determination === 'Detected' ? ['N Gene', 'S Gene', 'ORF1ab'] : []
 
         setDeterminations(
             determinations.map((d) =>
@@ -25,8 +25,8 @@ const DeterminationSelect: React.FC<{ sample: SampleDetermination }> = ({
                     ? { ...d, determination, amplifications }
                     : d
             )
-        );
-    };
+        )
+    }
 
     return (
         <Select
@@ -39,7 +39,7 @@ const DeterminationSelect: React.FC<{ sample: SampleDetermination }> = ({
         >
             {[options.map((o) => <Select.Option value={o}>{o}</Select.Option>)]}
         </Select>
-    );
-};
+    )
+}
 
-export default DeterminationSelect;
+export default DeterminationSelect

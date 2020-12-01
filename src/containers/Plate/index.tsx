@@ -1,40 +1,40 @@
-import React, { useContext, useState } from "react";
-import { Card, Row, Col, Statistic } from "antd";
-import { ContextGraphOptions } from "../../components/GraphOptions";
-import { GraphContextProvider } from "../../contexts/GraphContext";
-import { PlateContext } from "../../contexts/PlateContext";
-import { SampleDetermination } from "../../types";
-import PlateMap from "../../components/PlateMap";
-import { SampleGraph } from "../Rows/RowGraphs";
+import React, { useContext, useState } from 'react'
+import { Card, Row, Col, Statistic } from 'antd'
+import { ContextGraphOptions } from '../../components/GraphOptions'
+import { GraphContextProvider } from '../../contexts/GraphContext'
+import { PlateContext } from '../../contexts/PlateContext'
+import { SampleDetermination } from '../../types'
+import PlateMap from '../../components/PlateMap'
+import { SampleGraph } from '../Rows/RowGraphs'
 
 export default () => {
-    const { determinations } = useContext(PlateContext);
-    const [determination, setDetermination] = useState<SampleDetermination>();
+    const { determinations } = useContext(PlateContext)
+    const [determination, setDetermination] = useState<SampleDetermination>()
     const statistics = {
         notDetected: determinations.filter(
-            (d) => d.determination === "Not Detected"
+            (d) => d.determination === 'Not Detected'
         ).length,
         detected: determinations.filter(
             (d) =>
-                d.determination === "Detected" &&
-                d.sample_id !== "neg" &&
-                d.sample_id !== "pc"
+                d.determination === 'Detected' &&
+                d.sample_id !== 'neg' &&
+                d.sample_id !== 'pc'
         ).length,
         repeat: determinations.filter(
             (d) =>
-                d.determination === "Repeat" &&
-                d.sample_id !== "neg" &&
-                d.sample_id !== "pc"
+                d.determination === 'Repeat' &&
+                d.sample_id !== 'neg' &&
+                d.sample_id !== 'pc'
         ).length,
         inconclusive: determinations.filter(
-            (d) => d.determination === "Inconclusive"
+            (d) => d.determination === 'Inconclusive'
         ).length,
-        invalid: determinations.filter((d) => d.determination === "Invalid")
+        invalid: determinations.filter((d) => d.determination === 'Invalid')
             .length,
         control: determinations.filter(
-            (d) => d.sample_id === "neg" || d.sample_id === "pc"
+            (d) => d.sample_id === 'neg' || d.sample_id === 'pc'
         ).length,
-    };
+    }
 
     return (
         <GraphContextProvider>
@@ -67,7 +67,7 @@ export default () => {
                             <Statistic
                                 title="Detected"
                                 value={statistics.detected}
-                                style={{ margin: "0 20px" }}
+                                style={{ margin: '0 20px' }}
                             />
                             <Statistic
                                 title="Repeat"
@@ -76,7 +76,7 @@ export default () => {
                             <Statistic
                                 title="Inconclusive"
                                 value={statistics.inconclusive}
-                                style={{ margin: "0 20px" }}
+                                style={{ margin: '0 20px' }}
                             />
                             <Statistic
                                 title="Invalid"
@@ -85,7 +85,7 @@ export default () => {
                             <Statistic
                                 title="Controls"
                                 value={statistics.control}
-                                style={{ margin: "0 20px" }}
+                                style={{ margin: '0 20px' }}
                             />
                         </Row>
                     </Card>
@@ -96,24 +96,24 @@ export default () => {
                             <Statistic
                                 title="S Gene"
                                 value="Green"
-                                style={{ margin: "0 20px" }}
+                                style={{ margin: '0 20px' }}
                             />
                             <Statistic title="ORF1ab" value="Red" />
                             <Statistic
                                 title="MS2"
                                 value="Orange"
-                                style={{ margin: "0 20px" }}
+                                style={{ margin: '0 20px' }}
                             />
                             <Statistic title="RP-Cy5" value="Maroon" />
                             <Statistic
                                 title="50K Guide"
                                 value="Black"
-                                style={{ margin: "0 20px" }}
+                                style={{ margin: '0 20px' }}
                             />
                         </Row>
                     </Card>
                 </Col>
             </Row>
         </GraphContextProvider>
-    );
-};
+    )
+}

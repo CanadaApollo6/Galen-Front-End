@@ -1,13 +1,13 @@
-import { Card, Col, Row } from "antd";
-import React, { useContext } from "react";
-import PlateMap from "../../components/PlateMap";
-import { PlateContext } from "../../contexts/PlateContext";
+import { Card, Col, Row } from 'antd'
+import React, { useContext } from 'react'
+import PlateMap from '../../components/PlateMap'
+import { PlateContext } from '../../contexts/PlateContext'
 
 const Elution: React.FC = () => {
-    const { determinations } = useContext(PlateContext);
+    const { determinations } = useContext(PlateContext)
     const elutions = Array.from(
         determinations.reduce((acc, { elution }) => acc.add(elution), new Set())
-    );
+    )
     return (
         <>
             {elutions.map((e) => (
@@ -26,78 +26,78 @@ const Elution: React.FC = () => {
                                 <Col span={16}>
                                     <h1>Statistcs</h1>
                                     <h3>
-                                        Not Detected:{" "}
+                                        Not Detected:{' '}
                                         {
                                             determinations
                                                 .filter((d) => d.elution === e)
                                                 .filter(
                                                     (d) =>
                                                         d.determination ===
-                                                        "Not Detected"
+                                                        'Not Detected'
                                                 ).length
                                         }
                                     </h3>
                                     <h3>
-                                        Detected:{" "}
+                                        Detected:{' '}
                                         {
                                             determinations
                                                 .filter((d) => d.elution === e)
                                                 .filter(
                                                     (d) =>
                                                         d.determination ===
-                                                            "Detected" &&
-                                                        d.sample_id !== "neg" &&
-                                                        d.sample_id !== "pc"
+                                                            'Detected' &&
+                                                        d.sample_id !== 'neg' &&
+                                                        d.sample_id !== 'pc'
                                                 ).length
                                         }
                                     </h3>
                                     <h3>
-                                        Repeat:{" "}
+                                        Repeat:{' '}
                                         {
                                             determinations
                                                 .filter((d) => d.elution === e)
                                                 .filter(
                                                     (d) =>
                                                         d.determination ===
-                                                            "Repeat" &&
-                                                        d.sample_id !== "neg" &&
-                                                        d.sample_id !== "pc"
+                                                            'Repeat' &&
+                                                        d.sample_id !== 'neg' &&
+                                                        d.sample_id !== 'pc'
                                                 ).length
                                         }
                                     </h3>
                                     <h3>
-                                        Inconclusive:{" "}
+                                        Inconclusive:{' '}
                                         {
                                             determinations
                                                 .filter((d) => d.elution === e)
                                                 .filter(
                                                     (d) =>
                                                         d.determination ===
-                                                        "Inconclusive"
+                                                        'Inconclusive'
                                                 ).length
                                         }
                                     </h3>
                                     <h3>
-                                        Invalid:{" "}
+                                        Invalid:{' '}
                                         {
                                             determinations
                                                 .filter((d) => d.elution === e)
                                                 .filter(
                                                     (d) =>
                                                         d.determination ===
-                                                        "Invalid"
+                                                        'Invalid'
                                                 ).length
                                         }
                                     </h3>
                                     <h3>
-                                        Controls:{" "}
+                                        Controls:{' '}
                                         {
                                             determinations
                                                 .filter((d) => d.elution === e)
                                                 .filter(
                                                     (d) =>
-                                                        d.sample_id === "neg" ||
-                                                        d.sample_id === "pc"
+                                                        d.sample_id === 'neg' ||
+                                                        d.sample_id === 'pc'
                                                 ).length
                                         }
                                     </h3>
@@ -108,7 +108,7 @@ const Elution: React.FC = () => {
                 </Row>
             ))}
         </>
-    );
-};
+    )
+}
 
-export default Elution;
+export default Elution

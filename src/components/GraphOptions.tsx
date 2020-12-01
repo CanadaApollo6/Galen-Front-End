@@ -1,7 +1,7 @@
-import React from "react";
-import { Row, Col, Form } from "antd";
-import { ContextTargetSelect } from "./Inputs/TargetSelect";
-import { ContextGraphTypeSelect } from "./Inputs/GraphTypeSelect";
+import React from 'react'
+import { Row, Col, Form } from 'antd'
+import { ContextTargetSelect } from './Inputs/TargetSelect'
+import { ContextGraphTypeSelect } from './Inputs/GraphTypeSelect'
 //import { ContextScaleSelect } from './Inputs/ScaleSelect'
 
 export const ContextGraphOptions: React.FC = () => (
@@ -26,4 +26,4 @@ export const ContextGraphOptions: React.FC = () => (
             </Col> */}
         </Row>
     </Form>
-);
+)
