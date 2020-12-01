@@ -11,7 +11,7 @@ resources:
 variables:
   # Container registry service connection established during pipeline creation
   dockerRegistryServiceConnection: '1db860a0-de92-452c-b09a-8dc35d47f70a'
-  imageRepository: 'sauronbuildbuildid'
+  imageRepository: 'sauron:$(Build.BuildId)'
   containerRegistry: 'sauroncontainer.azurecr.io'
   dockerfilePath: '$(Build.SourcesDirectory)/Dockerfile'
   tag: '$(Build.BuildId)'
