@@ -146,6 +146,10 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                                                 title: "Delta RN",
                                             },
                                             xaxis: { title: "Cycle" },
+                                            legend: {
+                                                orientation: "h",
+                                                y: -0.25,
+                                            },
                                         });
                                     }
                                     if (v === "linear") {
@@ -155,6 +159,10 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                                                 title: "Delta RN",
                                             },
                                             xaxis: { title: "Cycle" },
+                                            legend: {
+                                                orientation: "h",
+                                                y: -0.25,
+                                            },
                                         });
                                     }
                                 }}
