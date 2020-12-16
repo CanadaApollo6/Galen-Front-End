@@ -158,25 +158,25 @@ export default () => {
                         <Row>
                             <Statistic
                                 title="N Gene"
-                                value={stats.max(nGeneData)}
+                                value={Math.round(stats.max(nGeneData))}
                             />
                             <Statistic
                                 title="S Gene"
-                                value={stats.max(sGeneData)}
+                                value={Math.round(stats.max(sGeneData))}
                                 style={{ margin: "0 20px" }}
                             />
                             <Statistic
                                 title="ORF1ab"
-                                value={stats.max(orf1abData)}
+                                value={Math.round(stats.max(orf1abData))}
                             />
                             <Statistic
                                 title="MS2"
-                                value={stats.max(ms2Data)}
+                                value={Math.round(stats.max(ms2Data))}
                                 style={{ margin: "0 20px" }}
                             />
                             <Statistic
                                 title="RP-Cy5"
-                                value={stats.max(rpcy5Data)}
+                                value={Math.round(stats.max(rpcy5Data))}
                             />
                         </Row>
                     </Card>
