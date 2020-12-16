@@ -31,6 +31,7 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
     const type = "scatter";
     const mode = "lines";
     const shape = "spline";
+    // Comment
 
     const x = Array(40)
         .fill(0)
