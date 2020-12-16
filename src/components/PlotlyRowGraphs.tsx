@@ -50,7 +50,7 @@ const PlotlyRowGraphs: React.FC<RowGraphProps> = ({ showLegend }) => {
     });
 
     const type = "scatter";
-    const mode = "lines+markers";
+    const mode = "lines";
     const shape = "spline";
 
     const x = Array(40)
@@ -295,8 +295,9 @@ const PlotlyRowGraphs: React.FC<RowGraphProps> = ({ showLegend }) => {
                 </Form>
             </Row>
             <Plot
-                data={_.flatten(rowTraces)}
+                data={traces}
                 layout={layout}
+                divId={"plotly-row-graph"}
                 revision={revision}
                 style={{ width: "25vw" }}
                 config={{
@@ -310,9 +311,8 @@ const PlotlyRowGraphs: React.FC<RowGraphProps> = ({ showLegend }) => {
                 }}
             ></Plot>
             <Plot
-                data={traces}
+                data={_.flatten(rowTraces)}
                 layout={layout}
-                divId={"plotly-row-graph"}
                 revision={revision}
                 style={{ width: "25vw" }}
                 config={{

@@ -29,7 +29,7 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
     const [target, setTarget] = React.useState<GraphTarget>("All");
 
     const type = "scatter";
-    const mode = "lines+markers";
+    const mode = "lines";
     const shape = "spline";
 
     const x = Array(40)
