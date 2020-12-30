@@ -13,7 +13,6 @@ type GraphProps = {
         orf1abData: number[];
     };
     revision: number;
-    title: string;
     showLegend: boolean;
 };
 const Plot = createPlotlyComponent(Plotly);
@@ -45,7 +44,7 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
         x,
         y: guideLine,
         type,
-        mode: "lines",
+        mode,
         name: "50K Guide",
         line: {
             dash: "dot",
@@ -219,7 +218,7 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                     displaylogo: false,
                     scrollZoom: true,
                 }}
-                style={{ width: "33.5vw", height: "47vh" }}
+                style={{ width: "33.75vw", height: "47vh" }}
             ></Plot>
         </div>
     );
