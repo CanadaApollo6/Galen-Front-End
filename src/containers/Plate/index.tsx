@@ -161,29 +161,39 @@ export default () => {
                             <Statistic
                                 title="Not Detected (Blue)"
                                 value={statistics.notDetected}
+                                valueStyle={{ color: "#5ba7c6" }}
                             />
                             <Statistic
                                 title="Detected (Red)"
                                 value={statistics.detected}
                                 style={{ margin: "0 20px" }}
+                                valueStyle={{ color: "crimson" }}
                             />
                             <Statistic
                                 title="Repeat (Yellow)"
                                 value={statistics.repeat}
+                                valueStyle={{
+                                    color: "#d7d700",
+                                }}
                             />
                             <Statistic
                                 title="Inconclusive (Orange)"
                                 value={statistics.inconclusive}
                                 style={{ margin: "0 20px" }}
+                                valueStyle={{
+                                    color: "orange",
+                                }}
                             />
                             <Statistic
                                 title="Invalid (Purple)"
                                 value={statistics.invalid}
+                                valueStyle={{ color: "mediumpurple" }}
                             />
                             <Statistic
                                 title="Controls (Grey)"
                                 value={statistics.control}
                                 style={{ margin: "0 20px" }}
+                                valueStyle={{ color: "grey" }}
                             />
                         </Row>
                     </Card>
