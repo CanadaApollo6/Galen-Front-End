@@ -116,17 +116,6 @@ const applyRP_Cy5Detector = async (samples: Sample[]): Promise<Sample[]> => {
         ...x,
     })) as Sample[];
 };
-// const applyRepeatAi = async (samples: Sample[]): Promise<Sample[]> => {
-//     const invalid_promises = samples.map(async (s) => {
-//         if (s.prediction === 'Repeat') return s
-
-//         const [prediction, confidence] = await InvalidDetector(s)
-
-//         return { ...s, prediction, confidence, determination: prediction }
-//     })
-
-//     return await Promise.all(invalid_promises)
-// }
 
 // const applyMS2Threshold = (samples: Sample[]): Sample[] =>
 //     samples.map((s) =>
@@ -134,9 +123,6 @@ const applyRP_Cy5Detector = async (samples: Sample[]): Promise<Sample[]> => {
 //             ? { ...s, amplifications: [...s.amplifications, "MS2"] }
 //             : s
 //     );
-
-// const applyRPCy5Threshold = (samples: Sample[]): Sample[] =>
-//      samples.map(s => s.rns.rp_cy5_delta.slice(0, 37).some(r => r > 50000) ? { ...s, amplifications: [...s.amplifications, 'RP-Cy5'] } : s)
 
 const importQuantFile = async (file: File): Promise<Sample[]> => {
     const samples: Sample[] = (await QuantExportParser(file)).map((x) => ({
@@ -156,10 +142,9 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
     //         determination: "Repeat",
     //         confidence: 1,
     //       };
-
     //     return s;
     //   });
-    // const repeated_samples = await applyRepeatAi(thresholded_samples)
+
     const detected_samples = await applyCovidAi(samples);
     const aggregatedSamples = async (
         thresholded_samples: Sample[]
@@ -294,6 +279,12 @@ const importQuantFile = async (file: File): Promise<Sample[]> => {
                 ) {
                     comparedSample.evaluated = false;
                 } else if (comparedSample.confidence >= 0.995) {
+                    comparedSample.evaluated = true;
+                }
+                if (
+                    comparedSample.sample_id === "neg" ||
+                    comparedSample.sample_id === "PC"
+                ) {
                     comparedSample.evaluated = true;
                 }
             }
