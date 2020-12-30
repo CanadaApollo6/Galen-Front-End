@@ -19,7 +19,7 @@ const Plot = createPlotlyComponent(Plotly);
 const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
     const [traces, setTraces] = React.useState<Data[]>([]);
     const [layout, setLayout] = React.useState<Partial<Layout>>({
-        title: "Selected Sample",
+        title: "Selected Sample - Linear",
         xaxis: { title: "Cycle" },
         yaxis: { title: "Delta RN", type: "linear" },
         showlegend: showLegend,
@@ -141,6 +141,8 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                                 onSelect={(v) => {
                                     if (v === "log") {
                                         setLayout({
+                                            title:
+                                                "Selected Sample - Logarithmic",
                                             yaxis: {
                                                 type: "log",
                                                 title: "Delta RN",
@@ -154,6 +156,7 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                                     }
                                     if (v === "linear") {
                                         setLayout({
+                                            title: "Selected Sample - Linear",
                                             yaxis: {
                                                 type: "linear",
                                                 title: "Delta RN",
