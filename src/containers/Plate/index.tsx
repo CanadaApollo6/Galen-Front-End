@@ -7,10 +7,13 @@ import PlateMap from "../../components/PlateMap";
 import * as stats from "../../services/StatsService";
 import { findIntersects } from "../../services/CTService";
 import PlotlyGraph from "../../components/PlotlyGraph";
+import AmpButtons from "../../components/AmpButtons";
+import DeterminationSelect from "../../components/Inputs/DeterminationSelect";
+import ExportButton from "../../components/ExportButton";
+import ImportQuantFileButton from "../../components/ImportQuantFileButton";
 
 export default () => {
-    const { rns } = useContext(PlateContext);
-    const { determinations } = useContext(PlateContext);
+    const { rns, file, determinations } = useContext(PlateContext);
     const [determination, setDetermination] = useState<SampleDetermination>();
     const [revision, setRevision] = useState<number>(0);
     const statistics = {
@@ -47,17 +50,100 @@ export default () => {
     const orf1abData = determination ? rns[well]["orf1ab_delta"] : noData;
     const rpcy5Data = determination ? rns[well]["rp_cy5_delta"] : noData;
     const ms2Data = determination ? rns[well]["ms2_delta"] : noData;
+
+    const marginLeft = 40;
+
     useEffect(() => {
         setRevision(revision + 1);
     }, [determination]);
 
-    const title = determination
-        ? `${determination.well} (${determination.sample_id})`
-        : "None Selected";
-    // title feature not currently working... determination appears to always be undefined
     return (
         <GraphContextProvider>
-            <Row gutter={15}>
+            <Col>
+                <Card style={{ marginBottom: 3 }}>
+                    <Row>
+                        <Statistic
+                            title="Plate"
+                            value={
+                                file?.name
+                                    .match(/\d{6}-COV\d{1,2}-[A-Z]/g)
+                                    ?.toString() ?? "No file loaded"
+                            }
+                        />
+                        <Statistic
+                            title="Well"
+                            value={determination ? determination.well : "None"}
+                            style={{ marginLeft }}
+                        />
+                        <Statistic
+                            title="Sample ID"
+                            value={
+                                determination ? determination.sample_id : "None"
+                            }
+                            style={{ marginLeft }}
+                            formatter={(value) => {
+                                return value.toString().replaceAll(",", "");
+                            }}
+                        />
+                        <Statistic
+                            title="Prediction"
+                            value={
+                                determination
+                                    ? determination.prediction
+                                    : "None"
+                            }
+                            style={{ marginLeft }}
+                        />
+                        <Statistic
+                            title="Confidence"
+                            value={
+                                determination
+                                    ? determination.confidence
+                                    : "None"
+                            }
+                            style={{ marginLeft }}
+                        />
+                        <Statistic
+                            title="Amplifications"
+                            prefix={
+                                determination ? (
+                                    <AmpButtons determination={determination} />
+                                ) : (
+                                    "None"
+                                )
+                            }
+                            value={" "}
+                            style={{ marginLeft }}
+                        />
+                        <Statistic
+                            title="Determination"
+                            prefix={
+                                determination ? (
+                                    <DeterminationSelect
+                                        sample={determination}
+                                    />
+                                ) : (
+                                    "None"
+                                )
+                            }
+                            value={" "}
+                            style={{ marginLeft }}
+                        />
+                        <Statistic
+                            title="Import/Export"
+                            prefix={<ExportButton />}
+                            value={" "}
+                            style={{ marginLeft }}
+                        />
+                        <Statistic
+                            prefix={<ImportQuantFileButton />}
+                            value={" "}
+                            style={{ marginLeft: 0, marginTop: 26 }}
+                        />
+                    </Row>
+                </Card>
+            </Col>
+            <Row gutter={5}>
                 <Col span={15}>
                     <Card>
                         <PlateMap
@@ -73,29 +159,29 @@ export default () => {
                         <h1>Statistics</h1>
                         <Row>
                             <Statistic
-                                title="Not Detected"
+                                title="Not Detected (Blue)"
                                 value={statistics.notDetected}
                             />
                             <Statistic
-                                title="Detected"
+                                title="Detected (Red)"
                                 value={statistics.detected}
                                 style={{ margin: "0 20px" }}
                             />
                             <Statistic
-                                title="Repeat"
+                                title="Repeat (Yellow)"
                                 value={statistics.repeat}
                             />
                             <Statistic
-                                title="Inconclusive"
+                                title="Inconclusive (Orange)"
                                 value={statistics.inconclusive}
                                 style={{ margin: "0 20px" }}
                             />
                             <Statistic
-                                title="Invalid"
+                                title="Invalid (Purple)"
                                 value={statistics.invalid}
                             />
                             <Statistic
-                                title="Controls"
+                                title="Controls (Grey)"
                                 value={statistics.control}
                                 style={{ margin: "0 20px" }}
                             />
@@ -114,7 +200,6 @@ export default () => {
                                 orf1abData,
                             }}
                             revision={revision}
-                            title={title}
                             showLegend={true}
                         />
                     </Card>
