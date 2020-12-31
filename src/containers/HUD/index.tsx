@@ -18,7 +18,7 @@ export const HUD: React.FC = () => {
                 <Route path="/" component={Plate} />
 
                 <Footer style={{ textAlign: "center" }}>
-                    Gravity Diagnostics ©2020
+                    Galen - Riel St. Amand
                 </Footer>
             </Content>
         </Layout>
