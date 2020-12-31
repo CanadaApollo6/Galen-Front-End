@@ -1,6 +1,6 @@
-# Project Sauron (AI Project)
+# Project Galen (AI Project)
 
-This is the prototype AI interface for Sauron.
+This is the prototype AI interface for Galen.
 
 Goals:
 * Augment lab technicians with AI to quickly process COVID results
