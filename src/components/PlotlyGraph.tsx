@@ -24,6 +24,30 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
         yaxis: { title: "Delta RN", type: "linear" },
         showlegend: showLegend,
         legend: { orientation: "h", y: -0.25 },
+        shapes: [
+            {
+                type: "line",
+                x0: 38,
+                y0: 0,
+                x1: 38,
+                yref: "paper",
+                y1: 1,
+                line: {
+                    color: "grey",
+                    width: 1.5,
+                    dash: "dot",
+                },
+            },
+        ],
+        annotations: [
+            {
+                text: "38",
+                y: 1.1,
+                yref: "paper",
+                x: 38,
+                showarrow: false,
+            },
+        ],
     });
     const [target, setTarget] = React.useState<GraphTarget>("All");
 
@@ -48,8 +72,8 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
         name: "50K Guide",
         line: {
             dash: "dot",
-            width: 4,
-            color: "black",
+            width: 1.5,
+            color: "grey",
         },
     };
 
@@ -152,6 +176,30 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                                                 orientation: "h",
                                                 y: -0.25,
                                             },
+                                            shapes: [
+                                                {
+                                                    type: "line",
+                                                    x0: 38,
+                                                    y0: 0,
+                                                    x1: 38,
+                                                    yref: "paper",
+                                                    y1: 1,
+                                                    line: {
+                                                        color: "grey",
+                                                        width: 1.5,
+                                                        dash: "dot",
+                                                    },
+                                                },
+                                            ],
+                                            annotations: [
+                                                {
+                                                    text: "38",
+                                                    y: 1.1,
+                                                    yref: "paper",
+                                                    x: 38,
+                                                    showarrow: false,
+                                                },
+                                            ],
                                         });
                                     }
                                     if (v === "linear") {
@@ -166,6 +214,30 @@ const PlotlyGraph: React.FC<GraphProps> = ({ data, revision, showLegend }) => {
                                                 orientation: "h",
                                                 y: -0.25,
                                             },
+                                            shapes: [
+                                                {
+                                                    type: "line",
+                                                    x0: 38,
+                                                    y0: 0,
+                                                    x1: 38,
+                                                    yref: "paper",
+                                                    y1: 1,
+                                                    line: {
+                                                        color: "grey",
+                                                        width: 1.5,
+                                                        dash: "dot",
+                                                    },
+                                                },
+                                            ],
+                                            annotations: [
+                                                {
+                                                    text: "38",
+                                                    y: 1.1,
+                                                    yref: "paper",
+                                                    x: 38,
+                                                    showarrow: false,
+                                                },
+                                            ],
                                         });
                                     }
                                 }}
