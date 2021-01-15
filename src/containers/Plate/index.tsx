@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Card, Row, Col, Statistic } from "antd";
+import { Card, Row, Col, Statistic, Button, Modal } from "antd";
 import { GraphContextProvider } from "../../contexts/GraphContext";
 import { PlateContext } from "../../contexts/PlateContext";
 import { SampleDetermination } from "../../types";
@@ -16,6 +16,8 @@ export default () => {
     const { rns, file, determinations } = useContext(PlateContext);
     const [determination, setDetermination] = useState<SampleDetermination>();
     const [revision, setRevision] = useState<number>(0);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const [elution, setElution] = useState<SampleDetermination[]>([]);
     const statistics = {
         notDetected: determinations.filter(
             (d) => d.determination === "Not Detected"
@@ -51,11 +53,30 @@ export default () => {
     const rpcy5Data = determination ? rns[well]["rp_cy5_delta"] : noData;
     const ms2Data = determination ? rns[well]["ms2_delta"] : noData;
 
-    const marginLeft = 40;
+    const marginLeft = 20;
 
     useEffect(() => {
         setRevision(revision + 1);
+        setElution(
+            determination
+                ? determinations.filter(
+                      (d) => d.elution === determination.elution
+                  )
+                : []
+        );
     }, [determination]);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
 
     return (
         <GraphContextProvider>
@@ -68,6 +89,137 @@ export default () => {
                                 file?.name
                                     .match(/\d{6}-COV\d{1,2}-[A-Z]/g)
                                     ?.toString() ?? "No file loaded"
+                            }
+                        />
+                        <Statistic
+                            title="Elution"
+                            value={" "}
+                            style={{ marginLeft }}
+                            prefix={
+                                <>
+                                    <Button type="primary" onClick={showModal}>
+                                        View Elution
+                                    </Button>
+                                    <Modal
+                                        title={
+                                            determination
+                                                ? `Elution ${determination.elution}`
+                                                : "Elution"
+                                        }
+                                        visible={isModalVisible}
+                                        onOk={handleOk}
+                                        onCancel={handleCancel}
+                                        centered={false}
+                                    >
+                                        <Col>
+                                            <Row style={{ marginBottom: 10 }}>
+                                                <PlateMap
+                                                    samples={elution}
+                                                    rowCount={12}
+                                                />
+                                            </Row>
+                                            <Row>
+                                                <Statistic
+                                                    title="Not Detected (Blue)"
+                                                    value={
+                                                        elution.filter(
+                                                            (d) =>
+                                                                d.determination ===
+                                                                "Not Detected"
+                                                        ).length
+                                                    }
+                                                    valueStyle={{
+                                                        color: "#5ba7c6",
+                                                    }}
+                                                />
+                                                <Statistic
+                                                    title="Detected (Red)"
+                                                    value={
+                                                        elution.filter(
+                                                            (d) =>
+                                                                d.determination ===
+                                                                    "Detected" &&
+                                                                d.sample_id !==
+                                                                    "neg" &&
+                                                                d.sample_id !==
+                                                                    "PC"
+                                                        ).length
+                                                    }
+                                                    style={{
+                                                        margin:
+                                                            "0px 20px 0px 31px",
+                                                    }}
+                                                    valueStyle={{
+                                                        color: "crimson",
+                                                    }}
+                                                />
+                                                <Statistic
+                                                    title="Repeat (Yellow)"
+                                                    value={
+                                                        elution.filter(
+                                                            (d) =>
+                                                                d.determination ===
+                                                                    "Repeat" &&
+                                                                d.sample_id !==
+                                                                    "neg" &&
+                                                                d.sample_id !==
+                                                                    "PC"
+                                                        ).length
+                                                    }
+                                                    style={{ margin: "0" }}
+                                                    valueStyle={{
+                                                        color: "#d7d700",
+                                                    }}
+                                                />
+                                            </Row>
+                                            <Row>
+                                                <Statistic
+                                                    title="Inconclusive (Orange)"
+                                                    value={
+                                                        elution.filter(
+                                                            (d) =>
+                                                                d.determination ===
+                                                                "Inconclusive"
+                                                        ).length
+                                                    }
+                                                    valueStyle={{
+                                                        color: "orange",
+                                                    }}
+                                                />
+                                                <Statistic
+                                                    title="Invalid (Purple)"
+                                                    value={
+                                                        elution.filter(
+                                                            (d) =>
+                                                                d.determination ===
+                                                                "Invalid"
+                                                        ).length
+                                                    }
+                                                    style={{ margin: "0 20px" }}
+                                                    valueStyle={{
+                                                        color: "mediumpurple",
+                                                    }}
+                                                />
+                                                <Statistic
+                                                    title="Controls (Grey)"
+                                                    value={
+                                                        elution.filter(
+                                                            (d) =>
+                                                                d.sample_id ===
+                                                                    "neg" ||
+                                                                d.sample_id ===
+                                                                    "PC"
+                                                        ).length
+                                                    }
+                                                    style={{}}
+                                                    valueStyle={{
+                                                        color: "grey",
+                                                    }}
+                                                />
+                                            </Row>
+                                        </Col>
+                                    </Modal>
+                                </>
                             }
                         />
                         <Statistic
