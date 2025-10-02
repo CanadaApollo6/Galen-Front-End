@@ -22,7 +22,7 @@ The system imports PCR Quant Excel files, runs them through TensorFlow.js neural
 ## Key Features
 
 - Real-time PCR curve visualization
-- 96-well plate map interface with color-coded results
+- 384-well plate map interface with color-coded results
 - TensorFlow.js integration for client-side ML inference
 - Excel file import/export for lab workflow integration
 - Built with direct feedback from lab techs and directors over 6 months
