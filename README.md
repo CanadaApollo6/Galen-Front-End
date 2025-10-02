@@ -104,11 +104,12 @@ The iterative development process prioritized:
 
 ```text
 src/
-├── components/        # React components for UI
-├── services/         # Data processing and ML inference logic
-│   └── ImportQuantFile.ts    # Excel parsing and ensemble logic
-├── models/           # TensorFlow.js model loading utilities
-└── utils/            # Helpers for normalization and formatting
+├── ai/               # TensorFlow.js model loading and inference logic
+├── components/       # React UI components
+├── containers/       # Container components for application layout
+├── contexts/         # React context providers for state management
+├── services/         # Data processing and business logic
+└── types/            # TypeScript type definitions
 ```
 
 ## Related Projects
