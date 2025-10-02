@@ -30,11 +30,11 @@ The system runs entirely in the browser - importing Excel files from PCR instrum
 
 **Real-Time ML Inference**
 - TensorFlow.js models loaded and run client-side
-- Processes all 96 samples in under 1 second
+- Processes all 384 samples in under 1 second
 - No server dependency - works offline once loaded
 
 **Clinical Visualization**
-- Color-coded 96-well plate map showing detection status
+- Color-coded 384-well plate map showing detection status
 - Individual PCR curve visualization with cycle thresholds
 - Gene-specific analysis (MS2, N, S, ORF1ab, RP) per sample
 - Quality control indicators via MS2 validation
@@ -49,7 +49,7 @@ The system runs entirely in the browser - importing Excel files from PCR instrum
 **Frontend Stack:**
 - React with TypeScript
 - TensorFlow.js for browser-based ML inference
-- Chart.js for PCR curve visualization
+- Plotly.js for PCR curve visualization
 - SheetJS (xlsx) for Excel file processing
 - Custom state management for plate data
 
