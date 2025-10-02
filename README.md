@@ -50,7 +50,6 @@ The system runs entirely in the browser - importing Excel files from PCR instrum
 - React with TypeScript
 - TensorFlow.js for browser-based ML inference
 - Plotly.js for PCR curve visualization
-- SheetJS (xlsx) for Excel file processing
 - Custom state management for plate data
 
 **Data Flow:**
